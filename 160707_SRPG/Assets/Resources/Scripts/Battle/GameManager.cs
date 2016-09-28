@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
     public int damage;
     IEnumerator ShowDamage()
     {
-        Vector3 objPos = new Vector3(damagedHex.transform.position.x - 0.1f, damagedHex.transform.position.y + 1.5f, damagedHex.transform.position.z - 0.5f);
+        Vector3 objPos = new Vector3(damagedHex.transform.position.x - 0.05f, damagedHex.transform.position.y + 1.5f, damagedHex.transform.position.z - 0.5f);
         GameObject GO_DamageText = (GameObject)Resources.Load("Prefabs/Effect/Damage_Text");
         GameObject obj = (GameObject)GameObject.Instantiate(GO_DamageText, objPos, GameManager.GetInst().gameObject.transform.rotation);
         obj.transform.SetParent(canvas.transform);

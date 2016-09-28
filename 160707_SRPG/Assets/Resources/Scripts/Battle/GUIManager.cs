@@ -127,7 +127,7 @@ public class GUIManager
 
         for(int i = 0; i < maxDraw; i++)
         {
-            players[curDraw].transform.position = new Vector3(camX + -4.2f + i * 0.7f, camY - 2.5f, camZ + 4.26f);
+            players[curDraw].transform.position = new Vector3(camX + -4.2f + i * 0.8f, camY - 2.7f, camZ + 4.26f);
             players[i].transform.rotation = turnRot;
             curDraw++;
             if(curDraw == pm.Players.Count)

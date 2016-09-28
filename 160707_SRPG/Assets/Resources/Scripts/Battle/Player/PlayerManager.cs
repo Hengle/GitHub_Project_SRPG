@@ -78,29 +78,29 @@ public class PlayerManager
         monster.name = "aiMonster";
         GUIManager.GetInst().AddTurnPlayer(monster);
         
-        userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
-        hex = MapManager.GetInst().GetPlayerHex(3, -3, 0);
-        userPlayer.CurHex = hex;
-        userPlayer.transform.position = userPlayer.CurHex.transform.position;
-        Players.Add(userPlayer);
-        userPlayer.name = "userPlayer2";
-        GUIManager.GetInst().AddTurnPlayer(userPlayer);
+        //userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
+        //hex = MapManager.GetInst().GetPlayerHex(3, -3, 0);
+        //userPlayer.CurHex = hex;
+        //userPlayer.transform.position = userPlayer.CurHex.transform.position;
+        //Players.Add(userPlayer);
+        //userPlayer.name = "userPlayer2";
+        //GUIManager.GetInst().AddTurnPlayer(userPlayer);
         
-        userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
-        hex = MapManager.GetInst().GetPlayerHex(5, -3, -2);
-        userPlayer.CurHex = hex;
-        userPlayer.transform.position = userPlayer.CurHex.transform.position;
-        Players.Add(userPlayer);
-        userPlayer.name = "userPlayer3";
-        GUIManager.GetInst().AddTurnPlayer(userPlayer);
+        //userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
+        //hex = MapManager.GetInst().GetPlayerHex(5, -3, -2);
+        //userPlayer.CurHex = hex;
+        //userPlayer.transform.position = userPlayer.CurHex.transform.position;
+        //Players.Add(userPlayer);
+        //userPlayer.name = "userPlayer3";
+        //GUIManager.GetInst().AddTurnPlayer(userPlayer);
         
-        userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
-        hex = MapManager.GetInst().GetPlayerHex(4, -2, -2);
-        userPlayer.CurHex = hex;
-        userPlayer.transform.position = userPlayer.CurHex.transform.position;
-        Players.Add(userPlayer);
-        userPlayer.name = "userPlayer4";
-        GUIManager.GetInst().AddTurnPlayer(userPlayer);
+        //userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
+        //hex = MapManager.GetInst().GetPlayerHex(4, -2, -2);
+        //userPlayer.CurHex = hex;
+        //userPlayer.transform.position = userPlayer.CurHex.transform.position;
+        //Players.Add(userPlayer);
+        //userPlayer.name = "userPlayer4";
+        //GUIManager.GetInst().AddTurnPlayer(userPlayer);
     }
 
     // 넘겨받은 좌표로 Player의 위치를 이동시킴
