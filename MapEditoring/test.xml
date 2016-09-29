@@ -1,4 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <MapInfo>
-  <MapSize>test</MapSize>
+  <MapSize>2 2 2</MapSize>
+  <Hex>
+    <MapPos>-2 0 2</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>-2 1 1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>-2 2 0</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>-1 -1 2</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>-1 0 1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>-1 1 0</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>-1 2 -1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>0 -2 2</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>0 -1 1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>0 0 0</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>0 1 -1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>0 2 -2</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>1 -2 1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>1 -1 0</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>1 0 -1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>1 1 -2</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>2 -2 0</MapPos>
+    <Passable>True</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>2 -1 -1</MapPos>
+    <Passable>False</Passable>
+  </Hex>
+  <Hex>
+    <MapPos>2 0 -2</MapPos>
+    <Passable>True</Passable>
+  </Hex>
 </MapInfo>

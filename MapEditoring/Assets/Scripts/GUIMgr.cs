@@ -3,12 +3,12 @@ using System.Collections;
 
 public class GUIMgr
 {
+    public bool Passable = true;
     private string curSet = "Passable";
-    private bool passable = true;
-
-    private int sizeX = 0;
-    private int sizeY = 0;
-    private int sizeZ = 0;
+    
+    public int SizeX = 5;
+    public int SizeY = 5;
+    public int SizeZ = 5;
 
     // 싱글톤
     private static GUIMgr inst = null;
@@ -30,28 +30,35 @@ public class GUIMgr
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Size X: ");
-        string sizeXstr = GUILayout.TextField("" + sizeX, 6, GUILayout.Width(50));
-        sizeX = int.Parse(sizeXstr);
+        string sizeXstr = GUILayout.TextField("" + SizeX, 6, GUILayout.Width(50));
+        SizeX = int.Parse(sizeXstr);
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Size Y: ");
-        string sizeYstr = GUILayout.TextField("" + sizeY, 6, GUILayout.Width(50));
-        sizeY = int.Parse(sizeYstr);
+        string sizeYstr = GUILayout.TextField("" + SizeY, 6, GUILayout.Width(50));
+        SizeY = int.Parse(sizeYstr);
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Size Z: ");
-        string sizeZstr = GUILayout.TextField("" + sizeZ, 6, GUILayout.Width(50));
-        sizeZ = int.Parse(sizeZstr);
+        string sizeZstr = GUILayout.TextField("" + SizeZ, 6, GUILayout.Width(50));
+        SizeZ = int.Parse(sizeZstr);
         GUILayout.EndHorizontal();
-
+        
         if(GUILayout.Button("Create"))
         {
-            MapMgr.GetInst().CreateMap(sizeX, sizeY, sizeZ);
+            MapMgr.GetInst().CreateMap(SizeX, SizeY, SizeZ);
         }
-        GUILayout.Button("Reset");
-        GUILayout.Button("Save");
+        // 3-05:9분
+        if (GUILayout.Button("Reset"))
+        {
+            MapMgr.GetInst().RemoveMap();
+        }
+        if(GUILayout.Button("Save"))
+        {
+            FileMgr.GetInst().SaveData();
+        }
 
         GUILayout.Label("Current Selected");
         // 3-03:20분
@@ -59,12 +66,12 @@ public class GUIMgr
         if(GUILayout.Button("Passable"))
         {
             curSet = "Passable";
-            passable = true;
+            Passable = true;
         }
         if(GUILayout.Button("Not Passable"))
         {
             curSet = "Not Passable";
-            passable = false;
+            Passable = false;
         }
 
         GUILayout.EndVertical();

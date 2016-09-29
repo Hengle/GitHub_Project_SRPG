@@ -4,7 +4,7 @@ using System.Collections;
 public class MapMgr
 {
     // map 3차원배열
-    public HexInfo[][][] map;
+    public HexInfo[][][] Map;
     private GameObject Go_Hex;
     private GameObject MapRoot;
     public float HexW;
@@ -41,13 +41,13 @@ public class MapMgr
 
         if(sizeX > 0 && sizeY > 0 && sizeZ > 0)
         {
-            map = new HexInfo[sizeX * 2 + 1][][];
+            Map = new HexInfo[sizeX * 2 + 1][][];
             for(int x = -sizeX; x <= sizeX; x++)
             {
-                map[x + sizeX] = new HexInfo[sizeY * 2 + 1][];
+                Map[x + sizeX] = new HexInfo[sizeY * 2 + 1][];
                 for(int y = -sizeY; y <= sizeY; y++)
                 {
-                    map[x + sizeX][y + sizeY] = new HexInfo[sizeZ * 2 + 1];
+                    Map[x + sizeX][y + sizeY] = new HexInfo[sizeZ * 2 + 1];
                     for(int z = -sizeZ; z <= sizeZ; z++)
                     {
                         if(x + y + z == 0)
@@ -58,7 +58,7 @@ public class MapMgr
                             hexInfo.Passable = true;
                             hexInfo.transform.position = GetWorldPos(x, y, z);
                             hexInfo.SetMapPos(x, y, z);
-                            map[x + sizeX][y + sizeY][z + sizeZ] = hexInfo;
+                            Map[x + sizeX][y + sizeY][z + sizeZ] = hexInfo;
                         }
                     }
                 }
@@ -68,5 +68,10 @@ public class MapMgr
         {
             return;
         }
+    }
+
+    public void RemoveMap()
+    {
+        GameObject.Destroy(MapRoot);
     }
 }
