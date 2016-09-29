@@ -46,7 +46,10 @@ public class GUIMgr
         sizeZ = int.Parse(sizeZstr);
         GUILayout.EndHorizontal();
 
-        GUILayout.Button("Create");
+        if(GUILayout.Button("Create"))
+        {
+            MapMgr.GetInst().CreateMap(sizeX, sizeY, sizeZ);
+        }
         GUILayout.Button("Reset");
         GUILayout.Button("Save");
 

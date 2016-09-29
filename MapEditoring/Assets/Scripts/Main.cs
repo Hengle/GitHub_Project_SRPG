@@ -5,7 +5,8 @@ public class Main : MonoBehaviour
 {
     // 3-01 XML 저장 및 로드 test
     FileMgr test;
-    GUIMgr guiMgr;
+    GUIMgr gm;
+    MapMgr mm;
 
 	// Use this for initialization
 	void Start ()
@@ -15,7 +16,7 @@ public class Main : MonoBehaviour
         //test.SaveData();
         //test.LoadData();
 
-        guiMgr = GUIMgr.GetInst();
+        gm = GUIMgr.GetInst();
 	}
 	
 	// Update is called once per frame
@@ -25,10 +26,10 @@ public class Main : MonoBehaviour
         CheckArrow();
 	}
 
-    // GUI는 OnGUI에서!!
+    // GUI는 OnGUI에서.
     void OnGUI()
     {
-        guiMgr.DrawLeftLayout();
+        gm.DrawLeftLayout();
     }
 
     // 3-03 줌 인/아웃
