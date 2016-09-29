@@ -47,8 +47,9 @@ public class GameManager : MonoBehaviour
 
 	void Start ()
     {
-        // 맵 생성
-        mm.CreateMap();
+        // 맵 생성 -> 3-05:19분 맵정보 xml file을 불러와서 적용할꺼라 주석처리
+        //mm.CreateMap();
+        mm.CreateTestMap();
         // 플레이어 생성
         pm.GenPlayerTest();
         // 배경음악 시작

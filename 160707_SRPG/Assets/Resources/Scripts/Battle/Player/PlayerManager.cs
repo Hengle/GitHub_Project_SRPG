@@ -59,8 +59,8 @@ public class PlayerManager
     {
         // Player 오브젝트 가져옴
         UserPlayer userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
-        // Hex정보 초기화(Player위치지정 0,0,0)
-        HexGrid hex = MapManager.GetInst().GetPlayerHex(2, -3, 1);
+        // Hex정보 초기화(Player생성위치 = x,y,z의 합이 0 이어야 함)
+        HexGrid hex = MapManager.GetInst().GetPlayerHex(1, -1, 0);
         // Player위치 적용
         userPlayer.CurHex = hex;
         // Player를 적용한 위치에 생성
@@ -71,7 +71,7 @@ public class PlayerManager
         GUIManager.GetInst().AddTurnPlayer(userPlayer);
         
         Monster monster = ((GameObject)GameObject.Instantiate(GO_monster)).GetComponent<Monster>();
-        hex = MapManager.GetInst().GetPlayerHex(2, -2, 0);
+        hex = MapManager.GetInst().GetPlayerHex(-2, 2, 0);
         monster.CurHex = hex;
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
@@ -188,13 +188,13 @@ public class PlayerManager
 
         if(enemyCnt == 0)
         {
-            EventManager.GetInst().GameEnd = true;
             GameManager.GetInst().ShowStageClear();
+            EventManager.GetInst().GameEnd = true;
         }
         else if(userCnt == 0)
         {
-            EventManager.GetInst().GameEnd = true;
             GameManager.GetInst().ShowGameOver();
+            EventManager.GetInst().GameEnd = true;
         }
     }
     

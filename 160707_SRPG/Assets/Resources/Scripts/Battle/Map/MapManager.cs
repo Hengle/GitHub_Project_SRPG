@@ -91,7 +91,69 @@ public class MapManager
         return new Vector3(X, 0, Z);
     }
 
-    // 맵을 만든다
+    // 3-05:19분30초 map info가 담긴 xml file불러와서 맵을 만든다
+    public void CreateTestMap()
+    {
+        MapInfo info = FileManager.GetInst().LoadMap();
+        if(info == null)
+        {
+            Debug.Log("info null");
+        }
+        if(info.HexInfos == null)
+        {
+            Debug.Log("info.HexInfos null");
+        }
+        CreateMap(info);
+    }
+
+    // 3-05:23분50초 맵 불러오기용(인수를 받음.안에 코드도 쫌다름)
+    public void CreateMap(MapInfo info)
+    {
+        MapSizeX = info.MapSizeX;
+        MapSizeY = info.MapSizeY;
+        MapSizeZ = info.MapSizeZ;
+
+        GameObject map = new GameObject("맵");
+        // Hex맵 그리는 부분
+        Map = new HexGrid[info.MapSizeX * 2 + 1][][];
+        for(int x = -MapSizeX; x <= MapSizeX; x++)
+        {
+            Map[x + MapSizeX] = new HexGrid[MapSizeY * 2 + 1][];
+            for(int y = -MapSizeY; y <= MapSizeY; y++)
+            {
+                Map[x + MapSizeX][y + MapSizeY] = new HexGrid[MapSizeZ * 2 + 1];
+            }
+        }
+        // 벽 토글 체크
+        foreach(HexInfo hexinfo in info.HexInfos)
+        {
+            GameObject hex = (GameObject)GameObject.Instantiate(GO_Hex);
+            hex.transform.parent = map.transform;
+            int x = hexinfo.MapPosX;
+            int y = hexinfo.MapPosY;
+            int z = hexinfo.MapPosZ;
+            Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ] = hex.GetComponent<HexGrid>();
+            Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].transform.position = GetWorldPos(x, y, z);
+            Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].SetMapPos(x, y, z);
+            Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].Passable = hexinfo.Passable;
+
+            if(hexinfo.Passable)
+            {
+                //Debug.Log("Passable true");
+                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].transform.renderer.material.color = Color.white;
+                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].OriColor = Color.white;
+            }
+            else
+            {
+                //Debug.Log("Passable false");
+                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].transform.renderer.material.color = Color.yellow;
+                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].OriColor = Color.yellow;
+            }
+        }
+
+    }
+
+    // 맵을 만든다(불러오기 메소드 없을때 쓰던거)
     public void CreateMap()
     {
         // 1-02
