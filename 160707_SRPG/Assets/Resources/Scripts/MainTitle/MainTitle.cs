@@ -7,8 +7,8 @@ public class MainTitle : MonoBehaviour
     {
         float btnW = 200f;
         float btnH = 50f;
-        Rect rect = new Rect(Screen.width / 2 - btnW / 2, Screen.height / 2 + 200, btnW, btnH);
-        if(GUI.Button(rect, "Game Start"))
+        Rect rect = new Rect(Screen.width / 2f - 100f, Screen.height / 2f + 180f, btnW, btnH);
+        if(GUI.Button(rect, "<color=#4000ff>" + "Game Start" + "</color>"))
         {
             Application.LoadLevel(1);
         }
