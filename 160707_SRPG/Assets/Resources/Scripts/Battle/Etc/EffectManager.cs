@@ -35,7 +35,7 @@ public class EffectManager
         //Debug.Log("defender name : " + other.name);
 
         Vector3 effectPos = go.transform.position;
-        effectPos.y = effectPos.y + 1.5f;
+        effectPos.y = effectPos.y + 0.7f;
         go.transform.position = effectPos;
     }
 

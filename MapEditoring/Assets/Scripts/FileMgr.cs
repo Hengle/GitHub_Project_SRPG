@@ -32,6 +32,10 @@ public class FileMgr
 
         rootNode.AppendChild(mapSize);
 
+        XmlElement background = xmlFIle.CreateElement("Background");
+        background.InnerText = "Background01";
+        rootNode.AppendChild(background);
+
         // 3-05:13분26초
         int mapSizeX = gm.SizeX;
         int mapSizeY = gm.SizeY;

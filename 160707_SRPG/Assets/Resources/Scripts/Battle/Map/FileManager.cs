@@ -34,6 +34,10 @@ public class FileManager
         int mapSizeY = mapInfo.MapSizeY = int.Parse(sizes[1]);
         int mapSizeZ = mapInfo.MapSizeZ = int.Parse(sizes[2]);
 
+        XmlNode background = xmlFile.SelectSingleNode("MapInfo/Background");
+        mapInfo.BackgroundDir = background.InnerText;
+        Debug.Log("background: " + mapInfo.BackgroundDir);
+
         XmlNodeList hexes = xmlFile.SelectNodes("MapInfo/Hex");
 
         foreach(XmlNode hex in hexes)

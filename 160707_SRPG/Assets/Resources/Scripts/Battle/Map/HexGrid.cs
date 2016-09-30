@@ -77,8 +77,8 @@ public class HexGrid : MonoBehaviour
             }
             else // 벽 Off
             {
-                transform.renderer.material.color = Color.white;
-                OriColor = Color.white;
+                transform.renderer.material.color = Color.black;
+                OriColor = Color.black;
             }
             Passable = !Passable;
         }

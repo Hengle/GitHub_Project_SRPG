@@ -25,6 +25,9 @@ public class MapManager
 {
     // TODO : 드래그&드롭으로 HexGrid프리팹 적용, 나중에는 코드에서 적용해야함.
     public GameObject GO_Hex;
+    // 지형 배경 
+    public GameObject GO_background;
+    public GameObject Background;
 
     // Hex Size는 Awake에서 설정됨
     public float HexW;
@@ -109,6 +112,11 @@ public class MapManager
     // 3-05:23분50초 맵 불러오기용(인수를 받음.안에 코드도 쫌다름)
     public void CreateMap(MapInfo info)
     {
+        string backgroundDir = info.BackgroundDir;
+        GO_background = (GameObject)Resources.Load("Prefabs/Map/Background/01/" + backgroundDir);
+        Background = (GameObject)GameObject.Instantiate(GO_background);
+        Background.transform.position = new Vector3(Background.transform.position.x, -0.1f, Background.transform.position.z);
+
         MapSizeX = info.MapSizeX;
         MapSizeY = info.MapSizeY;
         MapSizeZ = info.MapSizeZ;
@@ -124,7 +132,7 @@ public class MapManager
                 Map[x + MapSizeX][y + MapSizeY] = new HexGrid[MapSizeZ * 2 + 1];
             }
         }
-        // 벽 토글 체크
+        // 3-05:27분 벽 토글 체크
         foreach(HexInfo hexinfo in info.HexInfos)
         {
             GameObject hex = (GameObject)GameObject.Instantiate(GO_Hex);
@@ -146,8 +154,9 @@ public class MapManager
             else
             {
                 //Debug.Log("Passable false");
-                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].transform.renderer.material.color = Color.yellow;
-                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].OriColor = Color.yellow;
+                //Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].transform.renderer.material.color = Color.yellow;
+                //Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].OriColor = Color.yellow;
+                Map[x + MapSizeX][y + MapSizeY][z + MapSizeZ].gameObject.SetActive(false);
             }
         }
 
@@ -160,7 +169,6 @@ public class MapManager
         Map = new HexGrid[MapSizeX * 2 + 1][][];
         // 2-08:12분 코드 수정(Hierarchy에서 지저분한것들 하나로 묶기위한 오브젝트)
         GameObject map = new GameObject("맵"); // "맵"=hierarchy에 보여질 이름
-
         for (int x = -MapSizeX; x <= MapSizeX; x++)
         {
             Map[x + MapSizeX] = new HexGrid[MapSizeY * 2 + 1][];
