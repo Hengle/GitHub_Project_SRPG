@@ -27,14 +27,9 @@ public class PlayerBase : MonoBehaviour
     public ACT act;
 
     public float removeTime = 0f;
-
-	void Start ()
-    {
-	
-	}
-	
-	void Update ()
-    {
+    
+	//void Update ()
+    //{
         // 1-07:27분
         //if (act == ACT.MOVING)
         //{
@@ -60,7 +55,7 @@ public class PlayerBase : MonoBehaviour
         //        }
         //    }
         //}
-	}
+	//}
 
     //public virtual void DrawStatus()
     //{
@@ -76,10 +71,17 @@ public class PlayerBase : MonoBehaviour
     public void GetDamage(int damage)
     {
         status.CurHP -= damage;
-        if(status.CurHP <= 0)
+        if (status.CurHP <= 0)
         {
             Debug.Log(this.tag + " Die..ㅠㅠ");
-            ani.SetTrigger("die");
+            if (this.tag == "Player")
+            {
+                ani.SetTrigger("user_die");
+            }
+            else
+            {
+                ani.SetTrigger("mob_death");
+            }
             act = ACT.DEATH;
             // 캐릭터 삭제 시간
             removeTime += Time.deltaTime;
@@ -87,7 +89,14 @@ public class PlayerBase : MonoBehaviour
         else
         {
             Debug.Log(this.tag + " Hit !");
-            ani.SetTrigger("hited");
+            if(this.tag == "Player")
+            {
+                ani.SetTrigger("user_hited");
+            }
+            else
+            {
+                ani.SetTrigger("mob_hit");
+            }
         }
     }
 }
