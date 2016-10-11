@@ -32,6 +32,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: mob_run
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -244,6 +250,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110274402
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: run
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 003b339df5d28244abd427617ee6628f, type: 2}
+  m_ParentStateMachine: {fileID: 110723216}
+  m_Position: {x: -180, y: -156, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110296524
 State:
   m_ObjectHideFlags: 3
@@ -273,13 +294,13 @@ StateMachine:
   - {fileID: 110201552}
   - {fileID: 110217770}
   - {fileID: 110243116}
+  - {fileID: 110274402}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110243116}
-      second:
-      - {fileID: 110146844}
+      first: {fileID: 110274402}
+      second: []
     data:
       first: {fileID: 110217770}
       second:
@@ -288,16 +309,20 @@ StateMachine:
       - {fileID: 110171266}
       - {fileID: 110103198}
     data:
-      first: {fileID: 110201552}
+      first: {fileID: 110247170}
       second:
-      - {fileID: 110154626}
+      - {fileID: 110177956}
     data:
       first: {fileID: 110296524}
       second: []
     data:
-      first: {fileID: 110247170}
+      first: {fileID: 110201552}
       second:
-      - {fileID: 110177956}
+      - {fileID: 110154626}
+    data:
+      first: {fileID: 110243116}
+      second:
+      - {fileID: 110146844}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 60, y: 12, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
