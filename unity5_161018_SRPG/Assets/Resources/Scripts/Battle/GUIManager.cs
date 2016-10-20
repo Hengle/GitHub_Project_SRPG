@@ -94,7 +94,7 @@ public class GUIManager
     public void AddTurnPlayer(PlayerBase pb)
     {
         GameObject userPlayer = pm.GO_userPlayer;
-        GameObject aiMonster = pm.GO_monster;
+        GameObject aiMonster = pm.GO_cyclop;
 
         if (pb is UserPlayer)
         {

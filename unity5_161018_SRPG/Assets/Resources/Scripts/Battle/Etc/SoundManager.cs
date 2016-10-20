@@ -5,6 +5,7 @@ public class SoundManager
 {
     public AudioClip AC_Attack;
     public AudioClip AC_Music;
+    public AudioClip AC_BattleBuzzer;
 
     // 싱글턴
     private static SoundManager inst = null;
@@ -24,6 +25,7 @@ public class SoundManager
         // (GameObject)가 아니라 (AudioClip)임 헷갈리지마라
         AC_Attack = (AudioClip)Resources.Load("Sound/Effect/Crash");
         AC_Music = (AudioClip)Resources.Load("Sound/battle_bgm");
+        AC_BattleBuzzer = (AudioClip)Resources.Load("Sound/battlebuzzer");
     }
 
     // 2-08:20분30초 battle manager에서 position 넘겨받는걸로 수정됨
@@ -36,5 +38,10 @@ public class SoundManager
     public void PlayMusic(Vector3 pos)
     {
         AudioSource.PlayClipAtPoint(AC_Music, pos);
+    }
+
+    public void PlayBattleBuzzer(Vector3 pos)
+    {
+        AudioSource.PlayClipAtPoint(AC_BattleBuzzer, pos);
     }
 }

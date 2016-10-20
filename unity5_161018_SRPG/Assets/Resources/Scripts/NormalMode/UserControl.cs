@@ -12,6 +12,7 @@ public class UserControl : MonoBehaviour
     public Image fade;
     float fades = 0.0f;
     float time = 0f;
+    bool fadeSet = true;
 
     // Use this for initialization
     void Start()
@@ -33,7 +34,13 @@ public class UserControl : MonoBehaviour
         {
             animator.SetBool("user_walk2", false);
         }
-        
+
+        // 기술
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            animator.SetTrigger("user_skill");
+        }
+
         // if문으로 방향이 0일때는 회전하지 않게함.
         if (!(x == 0 && z == 0))
         {
@@ -45,33 +52,32 @@ public class UserControl : MonoBehaviour
             // 이동
             transform.Translate(Vector3.forward * Time.fixedDeltaTime);
         }
+
+        if (fadeSet == false)
+        {
+            time += Time.smoothDeltaTime;
+            if (time >= 0.1f)
+            {
+                fades += 0.01f;
+                fade.color = new Color(1f, 1f, 1f, fades);
+            }
+            if (fades >= 1.0f)
+            {
+                fadeSet = true;
+                time = 0f;
+                SceneManager.LoadScene(1);
+            }
+        }
     }
 
     void OnTriggerEnter(Collider col)
     {
         if(col.tag == "Monster")
         {
-            Debug.Log("부딪혔다~~");
+            Debug.Log("적 조우 !!!");
             animator.SetTrigger("user_attack");
-
-            StartCoroutine(SceneChanges());
-        }
-    }
-
-    IEnumerator SceneChanges()
-    {
-        time += Time.deltaTime;
-        if (time >= 0.1f)
-        {
-            fades += 0.1f;
-            fade.color = new Color(0f, 0f, 0f, fades);
-        }
-        else if (fades >= 1.0f)
-        {
-            // 3초 대기 후 아랫단 실행
-            yield return new WaitForSeconds(2f);
-            SceneManager.LoadScene(1);
-            time = 0f;
+            fadeSet = false;
+            SoundManager.GetInst().PlayBattleBuzzer(this.transform.position);
         }
     }
 }

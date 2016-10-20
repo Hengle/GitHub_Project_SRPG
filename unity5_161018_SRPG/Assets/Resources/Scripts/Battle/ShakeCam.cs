@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class ShakeCam : MonoBehaviour
 {
@@ -13,7 +13,12 @@ public class ShakeCam : MonoBehaviour
     public float randShake = 0f;
     private float timer = 0f;
     private Vector3 oriPos = Vector3.zero; // 초기 카메라 위치 정보
-    
+
+    public Image fade;
+    float fades = 1.0f;
+    float time = 0f;
+    bool fadeSet = true;
+
     void Awake()
     {
         oriPos = this.transform.position;
@@ -40,6 +45,21 @@ public class ShakeCam : MonoBehaviour
             {
                 state = STATE.NORMAL;
                 this.transform.position = oriPos;
+            }
+        }
+
+        if (fadeSet == true)
+        {
+            time += Time.smoothDeltaTime;
+            if (time >= 0.1f)
+            {
+                fades -= 0.01f;
+                fade.color = new Color(1f, 0f, 0f, fades);
+            }
+            if (fades <= 0f)
+            {
+                fadeSet = false;
+                time = 0f;
             }
         }
     }

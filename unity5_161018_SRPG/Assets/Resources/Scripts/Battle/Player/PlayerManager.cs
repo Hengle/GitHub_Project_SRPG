@@ -6,7 +6,8 @@ public class PlayerManager
 {
     // 드래그&드롭으로 Player프리팹 적용 => 2-08오면서 코드로 수정(14분)
     public GameObject GO_userPlayer;
-    public GameObject GO_monster;
+    public GameObject GO_cyclop;
+    public GameObject GO_skeleton;
     // Player관리 List
     public List<PlayerBase> Players = new List<PlayerBase>();
     // Player Turn Index
@@ -31,8 +32,9 @@ public class PlayerManager
     {
         turnOverTime = 0f;
         curTurnOverTime = 0f;
-        GO_monster = (GameObject)Resources.Load("Prefabs/AIPlayer/cyclops");
         GO_userPlayer = (GameObject)Resources.Load("Prefabs/UserPlayer/samuzai");
+        GO_cyclop = (GameObject)Resources.Load("Prefabs/AIPlayer/Cyclop/cyclops");
+        GO_skeleton = (GameObject)Resources.Load("Prefabs/AIPlayer/Skeleton/skeleton");
     }
 
     /* TODO : 이부분을 호출하는 부분이 필요함(2-08:14분30초) => 29분:Update()삭제. 
@@ -70,21 +72,21 @@ public class PlayerManager
         userPlayer.name = "userPlayer1";
         //GUIManager.GetInst().AddTurnPlayer(userPlayer);
         
-        Monster monster = ((GameObject)GameObject.Instantiate(GO_monster)).GetComponent<Monster>();
+        Monster monster = ((GameObject)GameObject.Instantiate(GO_cyclop)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(-2, 2, 0);
         monster.CurHex = hex;
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
-        monster.name = "aiMonster";
+        monster.name = "aiMonster1";
         //GUIManager.GetInst().AddTurnPlayer(monster);
 
-        //userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
-        //hex = MapManager.GetInst().GetPlayerHex(0, -2, 2);
-        //userPlayer.CurHex = hex;
-        //userPlayer.transform.position = userPlayer.CurHex.transform.position;
-        //Players.Add(userPlayer);
-        //userPlayer.name = "userPlayer2";
-        //GUIManager.GetInst().AddTurnPlayer(userPlayer);
+        monster = ((GameObject)GameObject.Instantiate(GO_skeleton)).GetComponent<Monster>();
+        hex = MapManager.GetInst().GetPlayerHex(2, -1, -1);
+        monster.CurHex = hex;
+        monster.transform.position = monster.CurHex.transform.position;
+        Players.Add(monster);
+        monster.name = "aiMonster2";
+        //GUIManager.GetInst().AddTurnPlayer(monster);
     }
 
     // 넘겨받은 좌표로 Player의 위치를 이동시킴

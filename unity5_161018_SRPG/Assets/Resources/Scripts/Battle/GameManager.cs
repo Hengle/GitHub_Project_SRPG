@@ -2,6 +2,7 @@
 using System.Collections;
 // TODO : 유니티 UI타입을 쓰려면 선언해야함(DamageText 표시해줄라고)
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -187,12 +188,12 @@ public class GameManager : MonoBehaviour
         if(nextTurnIdx == 1)
         {
             yield return new WaitForSeconds(1.5f);
-            Application.LoadLevel(2);
+            SceneManager.LoadScene(2);
         }
         else if(nextTurnIdx == 2)
         {
             yield return new WaitForSeconds(1.5f);
-            Application.LoadLevel(0);
+            SceneManager.LoadScene(0);
         }
     }
 }

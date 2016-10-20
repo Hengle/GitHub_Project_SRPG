@@ -63,7 +63,7 @@ public class HexGrid : MonoBehaviour
     {
         // 1-06:9분
         Debug.Log(MapPos + "OnMouseDown");
-
+        
         PlayerManager pm = PlayerManager.GetInst();
         PlayerBase pb = pm.Players[pm.CurTurnIdx];
         

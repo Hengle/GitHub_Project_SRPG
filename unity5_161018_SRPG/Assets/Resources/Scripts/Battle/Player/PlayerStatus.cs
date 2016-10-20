@@ -16,7 +16,7 @@ public class PlayerStatus
     public PlayerStatus()
     {
         Name = "test";
-        CurHP = 30;
+        CurHP = 100;
         MoveRange = 3;
         AtkRange = 1;
         MoveSpeed = 5f;

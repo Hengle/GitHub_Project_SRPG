@@ -26,7 +26,7 @@ public class EffectManager
     public void Init()
     {
         // GO_AttackEffect에 damage이펙트를 드래그&드롭한것과 같음(이건 코드화한거임)
-        GO_AttackEffect = (GameObject)Resources.Load("Prefabs/damage");
+        GO_AttackEffect = (GameObject)Resources.Load("Prefabs/blood");
         GO_Skill = (GameObject)Resources.Load("Prefabs/Effect/skill1");
     }
 
