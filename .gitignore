@@ -1,12 +1,13 @@
 # Created by https://www.gitignore.io/api/unity
 
 ### Unity ###
-/160707_SRPG/[Ll]ibrary/
-/160707_SRPG/[Tt]emp/
-/160707_SRPG/[Oo]bj/
-/160707_SRPG/[Bb]uild/
-/160707_SRPG/[Bb]uilds/
-/160707_SRPG/Assets/AssetStoreTools*
+/unity5_161018_SRPG/[Ll]ibrary/
+/unity5_161018_SRPG/[Tt]emp/
+/unity5_161018_SRPG/[Oo]bj/
+/unity5_161018_SRPG/[Bb]uild/
+/unity5_161018_SRPG/[Bb]uilds/
+/unity5_161018_SRPG/Assets/AssetStoreTools*
+/unity5_161018_SRPG/Assets/Resources/Reference/
 /MapEditoring/[Ll]ibrary/
 /MapEditoring/[Tt]emp/
 /MapEditoring/[Oo]bj/
