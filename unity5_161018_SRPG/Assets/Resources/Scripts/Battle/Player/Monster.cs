@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 // 1-10
 public class Monster : PlayerBase
@@ -106,7 +105,7 @@ public class Monster : PlayerBase
         PlayerBase pb = pm.Players[pm.CurTurnIdx];
         if (pb.act == ACT.ATTACKHIGHLIGHT)
         {
-            BattleManager.GetInst().AttackAtoB(pb, this, pb.activeSkill);
+            BattleManager.GetInst().AttackAtoB(pb, this, pb.skillSet);
         }
     }
 }

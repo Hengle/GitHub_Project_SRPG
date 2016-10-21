@@ -136,6 +136,8 @@ public class PlayerManager
         PlayerBase pb = Players[CurTurnIdx];
         // 턴 넘기고 대기 상태로 전환
         pb.act = ACT.IDLE;
+        // 턴 넘기고 skillSet 초기화
+        pb.skillSet = SKILL.NONE;
         // Turn Index 증가
         CurTurnIdx++;
         // Index가 List크기보다 크거나같아지면,
@@ -196,6 +198,12 @@ public class PlayerManager
                 return;
             }
 
+            if (GUIManager.GetInst().skCommand == SKILLWINDOW.ON)
+            {
+                Debug.Log(GUIManager.GetInst().skCommand);
+                GUIManager.GetInst().skCommand = SKILLWINDOW.OFF;
+            }
+
             // step 1. idle일때는 할일이 없음
             ACT act = Players[CurTurnIdx].act;
             if(act == ACT.IDLE)
@@ -203,7 +211,7 @@ public class PlayerManager
                 return;
             }
 
-            // step 2. attack이나 move일때는 하이라이트를 초기화하고 idle로 돌림
+            // step 2. 상태가 attack이거나 move라면 하이라이트를 초기화하고 idle로 돌림
             if(act == ACT.MOVEHIGHLIGHT || act == ACT.ATTACKHIGHLIGHT)
             {
                 Players[CurTurnIdx].act = ACT.IDLE;

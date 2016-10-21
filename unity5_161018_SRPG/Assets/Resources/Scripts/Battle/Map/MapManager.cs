@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class Path
@@ -322,7 +321,7 @@ public class MapManager
     }
 
     // 2-03:11분
-    // monster턴일때 hex color를 원래색으로 복귀(안해줘도될거같은데..)
+    // monster턴일때 hex color를 원래색으로 복귀(안해줘도될거같음)
     public void ResetMapColor(Point pos)
     {
         Map[pos.X + MapSizeX][pos.Y + MapSizeY][pos.Z + MapSizeZ].transform.GetComponent<Renderer>().material.color = Map[pos.X + MapSizeX][pos.Y + MapSizeY][pos.Z + MapSizeZ].OriColor;

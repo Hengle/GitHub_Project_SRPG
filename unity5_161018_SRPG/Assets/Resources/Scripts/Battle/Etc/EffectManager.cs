@@ -7,7 +7,9 @@
 public class EffectManager
 {   
     public GameObject GO_AttackEffect;
-    public GameObject GO_Skill;
+    public GameObject GO_pSkill1;
+    public GameObject GO_pSkill2;
+    public GameObject GO_mSkill1;
 
     // 싱글턴
     private static EffectManager inst = null;
@@ -26,12 +28,14 @@ public class EffectManager
     public void Init()
     {
         // GO_AttackEffect에 damage이펙트를 드래그&드롭한것과 같음(이건 코드화한거임)
-        GO_AttackEffect = (GameObject)Resources.Load("Prefabs/blood");
-        GO_Skill = (GameObject)Resources.Load("Prefabs/Effect/skill1");
+        GO_AttackEffect = (GameObject)Resources.Load("Prefabs/Effect/blood");
+        GO_pSkill1 = (GameObject)Resources.Load("Prefabs/Effect/skill1");
+        GO_pSkill2 = (GameObject)Resources.Load("Prefabs/Effect/SwordMagic");
+        GO_mSkill1 = (GameObject)Resources.Load("Prefabs/Effect/Claw_Hit");
     }
 
     // 피 터지는 효과
-    public void ShowEffect(Transform other)
+    public void ShowDamageEffect(Transform other)
     {
         GameObject go = (GameObject)GameObject.Instantiate(GO_AttackEffect, other.transform.position, other.transform.rotation);
         //Debug.Log("defender name : " + other.name);
@@ -42,16 +46,34 @@ public class EffectManager
     }
 
     // 2-10:8분 데미지 텍스트 표시
-    public void ShowDamage(HexGrid hex, int damage)
+    public void ShowDamageText(HexGrid hex, int damage)
     {
         GameManager.GetInst().damagedHex = hex;
         GameManager.GetInst().damage = damage;
         GameManager.GetInst().StartCoroutine("ShowDamage");
     }
 
-    // Player skill:ICE STORM
-    public void Skill1(Transform target)
+    // Player skill
+    public void IceAge(Transform target)
     {
-        GameObject skill = (GameObject)GameObject.Instantiate(GO_Skill, target.transform.position, Quaternion.Euler(0f, 0f, 0f));
+        GameObject skill = (GameObject)GameObject.Instantiate(GO_pSkill1, target.transform.position, Quaternion.Euler(0f, 0f, 0f));
+    }
+
+    // Player skill
+    public void TornadoBlade(Transform target)
+    {
+        GameObject go = (GameObject)GameObject.Instantiate(GO_pSkill2, target.transform.position, Quaternion.Euler(0f, 0f, 0f));
+        Vector3 effectPos = go.transform.position;
+        effectPos.y = effectPos.y + 0.7f;
+        go.transform.position = effectPos;
+    }
+
+    // Monster skill
+    public void BeastBite(Transform target)
+    {
+        GameObject go = (GameObject)GameObject.Instantiate(GO_mSkill1, target.transform.position, Quaternion.Euler(0f, 0f, 0f));
+        Vector3 effectPos = go.transform.position;
+        effectPos.y = effectPos.y + 0.7f;
+        go.transform.position = effectPos;
     }
 }

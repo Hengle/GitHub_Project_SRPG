@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 // 1-10
 public class UserPlayer : PlayerBase

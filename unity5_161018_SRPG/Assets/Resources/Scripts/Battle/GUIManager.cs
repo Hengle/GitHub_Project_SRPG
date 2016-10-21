@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public enum SKILLWINDOW
+{
+    OFF,
+    ON
+}
+
 public class GUIManager
 {
     private PlayerManager pm = null;
+    // 스킬 커맨드창 on/off
+    public SKILLWINDOW skCommand = SKILLWINDOW.OFF;
+
     // 싱글턴
     private static GUIManager inst = null;
     public static GUIManager GetInst()
@@ -24,11 +33,15 @@ public class GUIManager
             PlayerBase pb = pm.Players[pm.CurTurnIdx];
             if (pb is UserPlayer)
             {
-                // 2-08:35분 현재 상태가 idle일때만 GUI활성화(행동중일때 다른거못하게할려고)
-                if(pb.act == ACT.IDLE)
+                // 2-08:35분 현재 상태가 idle이고 skCommand가 off일때만 GUI활성화
+                if(pb.act == ACT.IDLE && skCommand == SKILLWINDOW.OFF)
                 {
                     DrawStatus(pm.Players[pm.CurTurnIdx]);
                     DrawCommand(pm.Players[pm.CurTurnIdx]);
+                }
+                if(skCommand == SKILLWINDOW.ON)
+                {
+                    DrawSkillTree(pm.Players[pm.CurTurnIdx]);
                 }
             }
         }
@@ -46,40 +59,88 @@ public class GUIManager
         GUILayout.EndArea();
     }
 
+    // 기본 동작 커맨드창
     public void DrawCommand(PlayerBase pb)
     {
         GUILayout.BeginArea(new Rect(Screen.width - 150f, Screen.height / 2 + 127f, 150f, Screen.height / 4), "Command", GUI.skin.window);
 
-        if(GUILayout.Button("Move"))
+        if (GUILayout.Button("Move"))
         {
-            if(MapManager.GetInst().HighlightMoveRange(pb.CurHex, pb.status.MoveRange) == true)
+            if (MapManager.GetInst().HighlightMoveRange(pb.CurHex, pb.status.MoveRange) == true)
             {
                 pb.act = ACT.MOVEHIGHLIGHT;
             }
         }
-        if(GUILayout.Button("Attack"))
-        {
-            if(MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
-            {
-                // HIGHLIGHT로 상태 전환(Move버튼을 눌렀을때만 이동하게 하려고)
-                pb.act = ACT.ATTACKHIGHLIGHT;
-                pb.activeSkill = false;
-            }
-        }
-        if (GUILayout.Button("Skill ( Ice-Storm )"))
+        if (GUILayout.Button("Attack"))
         {
             if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
             {
-                // HIGHLIGHT로 상태 전환
+                // HIGHLIGHT로 상태 전환(Move버튼을 눌렀을때만 이동하게 하려고)
                 pb.act = ACT.ATTACKHIGHLIGHT;
-                pb.activeSkill = true;
+                pb.skillSet = SKILL.NONE;
             }
+        }
+        if (GUILayout.Button("Skill Tree"))
+        {
+            skCommand = SKILLWINDOW.ON;
         }
         if (GUILayout.Button("Next Turn"))
         {
             PlayerManager.GetInst().NextTurn();
         }
-        
+
+        GUILayout.EndArea();
+    }
+
+    // 스킬 동작 커맨드창
+    void DrawSkillTree(PlayerBase pb)
+    {
+        GUILayout.BeginArea(new Rect(Screen.width - 150f, Screen.height / 2 + 127f, 150f, Screen.height / 4), "Skill Tree", GUI.skin.window);
+
+        if (GUILayout.Button("Ice Age"))
+        {
+            if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
+            {
+                skCommand = SKILLWINDOW.OFF;
+                // HIGHLIGHT로 상태 전환
+                pb.act = ACT.ATTACKHIGHLIGHT;
+                pb.skillSet = SKILL.SKILL1;
+            }
+        }
+        if (GUILayout.Button("Tornado Blade"))
+        {
+            skCommand = SKILLWINDOW.OFF;
+            if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
+            {
+                skCommand = SKILLWINDOW.OFF;
+                // HIGHLIGHT로 상태 전환
+                pb.act = ACT.ATTACKHIGHLIGHT;
+                pb.skillSet = SKILL.SKILL2;
+            }
+        }
+        if (GUILayout.Button("Skill 3"))
+        {
+            skCommand = SKILLWINDOW.OFF;
+            if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
+            {
+                skCommand = SKILLWINDOW.OFF;
+                // HIGHLIGHT로 상태 전환
+                pb.act = ACT.ATTACKHIGHLIGHT;
+                pb.skillSet = SKILL.SKILL3;
+            }
+        }
+        if (GUILayout.Button("Skill 4"))
+        {
+            skCommand = SKILLWINDOW.OFF;
+            if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
+            {
+                skCommand = SKILLWINDOW.OFF;
+                // HIGHLIGHT로 상태 전환
+                pb.act = ACT.ATTACKHIGHLIGHT;
+                pb.skillSet = SKILL.SKILL4;
+            }
+        }
+
         GUILayout.EndArea();
     }
 

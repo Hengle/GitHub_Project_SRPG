@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             Debug.Log("mouse right button down");
+            Debug.Log(GUIManager.GetInst().skCommand);
             pm.MouseInputProc(1);
         }
     }
@@ -134,6 +135,7 @@ public class GameManager : MonoBehaviour
         GetComponent<Camera>().transform.position = new Vector3(destX, GetComponent<Camera>().transform.position.y, destZ -3.5f);
     }
 
+    // TODO : 데미지 텍스트 표시
     public HexGrid damagedHex;
     public int damage;
     IEnumerator ShowDamage()

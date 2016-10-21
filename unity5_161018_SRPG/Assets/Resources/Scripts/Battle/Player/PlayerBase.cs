@@ -13,6 +13,15 @@ public enum ACT
     DEATH
 }
 
+public enum SKILL
+{
+    NONE,
+    SKILL1,
+    SKILL2,
+    SKILL3,
+    SKILL4
+}
+
 public class PlayerBase : MonoBehaviour
 {
     // 2-04: Animator ani변수선언(Awake지움)
@@ -23,12 +32,13 @@ public class PlayerBase : MonoBehaviour
     public HexGrid CurHex;
     // 목적지 Hex의 위치
     public List<HexGrid> MoveHexes;
-    // ACT state 선언
+    // 상태 선언
     public ACT act;
+    // 사용할 스킬
+    public SKILL skillSet = SKILL.NONE;
 
     public float removeTime = 0f;
     public bool activeMobState = true;
-    public bool activeSkill = false;
     
 	//void Update ()
     //{

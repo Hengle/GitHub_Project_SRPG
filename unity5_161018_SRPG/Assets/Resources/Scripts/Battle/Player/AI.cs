@@ -80,8 +80,6 @@ public class AI
 
         // step 1. 근접한 유저플레이어를 찾는다
         PlayerBase nearUserPlayer = null;
-        // Player skill를 false로 전환
-        aiMonster.activeSkill = false;
         int nearDistance = 1000;
         foreach (PlayerBase up in pm.Players)
         {
@@ -99,7 +97,7 @@ public class AI
         // step 2. 찾았다면 공격을 한다
         if(nearUserPlayer != null)
         {
-            BattleManager.GetInst().AttackAtoB(aiMonster, nearUserPlayer, aiMonster.activeSkill);
+            BattleManager.GetInst().AttackAtoB(aiMonster, nearUserPlayer, aiMonster.skillSet);
             return;
 
             // 2-06 32분30초 주석처리

@@ -6,7 +6,8 @@ public class BattleManager
     private float normalAttackTime = 0f;
     private PlayerBase attacker = null;
     private PlayerBase defender = null;
-    bool skillSet;
+    private SKILL skillState;
+
     // ======================================
     // TODO :   싱글턴 만드는 거 외우기
     private static BattleManager inst = null;
@@ -19,7 +20,7 @@ public class BattleManager
         return inst;
     }
     // ======================================
-        
+    
     public void CheckBattle()/* TODO : 이부분을 호출하는 부분 필요함(노멀매니저화되면서 Hierarchy오브젝트를 없앴기때문에)
                               당연히 나중에 호출할때 이름도 바꿔서 Update()말고 다른걸로 변경 */
     {
@@ -32,54 +33,167 @@ public class BattleManager
                 // 데미지 받는 부분 처리
                 //Debug.Log("Attack!! " + attacker.status.Name + " to " + defender.status.Name);
                 Debug.Log("Attack!! " + attacker.tag + " to " + defender.tag);
-                if(skillSet == false)
+
+                // attacker를 확인해서 skill 분기
+                if(attacker.tag == "Player")
                 {
-                    // TODO : 데미지를 준다(only one)
-                    defender.GetDamage(10);
-                    // 데미지 화면 표시
-                    EffectManager.GetInst().ShowDamage(defender.CurHex, 10);
+                    UserSkillEffect();
                 }
                 else
                 {
-                    defender.GetDamage(20);
-                    EffectManager.GetInst().Skill1(defender.transform);
-                    EffectManager.GetInst().ShowDamage(defender.CurHex, 20);
+                    MobSkillEffect();
                 }
-                EffectManager.GetInst().ShowEffect(defender.transform);
-                SoundManager.GetInst().PlayAttackSound(attacker.transform.position);
-                // turn 넘기는 시간
-                PlayerManager.GetInst().SetTurnOverTime(2.5f);
             }
         }
 	}
 
-    public void AttackAtoB(PlayerBase a, PlayerBase b, bool skill)
+    public void AttackAtoB(PlayerBase a, PlayerBase b, SKILL skill)
     {
         // attack 애니메이션이 때리는 시점은 0.18초
         // Monster(or Player)방향으로 바라본다(회전)
         a.transform.rotation = Quaternion.LookRotation((b.CurHex.transform.position - a.transform.position).normalized);
-        if(skill == false)
-        {
-            if (a.tag == "Player")
-            {
-                a.ani.SetTrigger("user_attack");
-            }
-            else
-            {
-                a.ani.SetTrigger("mob_attack");
-            }
-        }
-        else // 나중에 일반공격이랑 구분되게 애니메이션 바꿔줘야함
-        {
-            if (a.tag == "Player")
-            {
-                a.ani.SetTrigger("user_attack");
-            }
-        }
+        
         a.act = ACT.ATTACKING;
         normalAttackTime = Time.smoothDeltaTime;
         attacker = a;
         defender = b;
-        skillSet = skill;
+        skillState = skill;
+
+        SkillAnimation();
+    }
+    
+    public void SkillAnimation()
+    {
+        int a = Random.Range(0, 1);
+        Debug.Log("mob random skill : " + a);
+        if(attacker.tag == "Monster")
+        {
+            if (a <= 0)
+            {
+                skillState = SKILL.NONE;
+            }
+            else if(a <= 1)
+            {
+                skillState = SKILL.SKILL1;
+            }
+            //else if (a <= 2)
+            //{
+            //    skillState = SKILL.SKILL2;
+            //}
+            //else if (a <= 3)
+            //{
+            //    skillState = SKILL.SKILL3;
+            //}
+            //else if (a <= 3)
+            //{
+            //    skillState = SKILL.SKILL4;
+            //}
+        }
+
+        if (skillState == SKILL.NONE)// 그냥 공격 '애니메이션'
+        {
+            if (attacker.tag == "Player")
+            {
+                attacker.ani.SetTrigger("user_attack");
+            }
+            else
+            {
+                attacker.ani.SetTrigger("mob_attack");
+            }
+        }
+        else if (skillState == SKILL.SKILL1)// 스킬 애니메이션
+        {
+            if (attacker.tag == "Player")
+            {
+                attacker.ani.SetTrigger("user_attack");
+            }
+            else
+            {
+                attacker.ani.SetTrigger("mob_attack");
+            }
+        }
+        else if (skillState == SKILL.SKILL2)// 스킬 애니메이션
+        {
+            if (attacker.tag == "Player")
+            {
+                attacker.ani.SetTrigger("user_skill");
+            }
+            else
+            {
+                attacker.ani.SetTrigger("mob_attack");
+            }
+        }
+    }
+
+    // UserPlayer의 일반공격 & 스킬 '이펙트' 분기
+    public void UserSkillEffect()
+    {
+        switch (skillState)
+        {
+            case SKILL.NONE:
+                // TODO : 데미지 값을 넘겨준다
+                defender.GetDamage(10);
+                // 데미지 화면 표시
+                EffectManager.GetInst().ShowDamageText(defender.CurHex, 10);
+                // 기본 데미지 이펙트
+                EffectManager.GetInst().ShowDamageEffect(defender.transform);
+                // 데미지 입는 소리
+                SoundManager.GetInst().PlayAttackSound(attacker.transform.position);
+                // turn 넘기는 시간
+                PlayerManager.GetInst().SetTurnOverTime(2.5f);
+                break; //구문의 끝
+            case SKILL.SKILL1:
+                defender.GetDamage(20);
+                EffectManager.GetInst().IceAge(defender.transform);
+                EffectManager.GetInst().ShowDamageEffect(defender.transform);
+                EffectManager.GetInst().ShowDamageText(defender.CurHex, 20);
+                SoundManager.GetInst().PlayAttackSound(attacker.transform.position);
+                PlayerManager.GetInst().SetTurnOverTime(2.5f);
+                break;
+            case SKILL.SKILL2:
+                defender.GetDamage(30);
+                EffectManager.GetInst().TornadoBlade(defender.transform);
+                EffectManager.GetInst().ShowDamageEffect(defender.transform);
+                EffectManager.GetInst().ShowDamageText(defender.CurHex, 30);
+                SoundManager.GetInst().PlayAttackSound(attacker.transform.position);
+                PlayerManager.GetInst().SetTurnOverTime(4f);
+                break;
+            case SKILL.SKILL3:
+                
+                break;
+            case SKILL.SKILL4:
+
+                break;
+        }
+    }
+    // Monster의 일반공격 & 스킬 '이펙트' 분기
+    public void MobSkillEffect()
+    {
+        switch (skillState)
+        {
+            case SKILL.NONE:
+                defender.GetDamage(10);
+                EffectManager.GetInst().ShowDamageEffect(defender.transform);
+                EffectManager.GetInst().ShowDamageText(defender.CurHex, 10);
+                SoundManager.GetInst().PlayAttackSound(attacker.transform.position);
+                PlayerManager.GetInst().SetTurnOverTime(2.5f);
+                break;
+            case SKILL.SKILL1:
+                defender.GetDamage(15);
+                EffectManager.GetInst().BeastBite(defender.transform);
+                EffectManager.GetInst().ShowDamageText(defender.CurHex, 15);
+                SoundManager.GetInst().PlayAttackSound(attacker.transform.position);
+                PlayerManager.GetInst().SetTurnOverTime(2.5f);
+                break;
+            case SKILL.SKILL2:
+
+                break;
+            case SKILL.SKILL3:
+
+                break;
+            case SKILL.SKILL4:
+
+                break;
+        }
     }
 }

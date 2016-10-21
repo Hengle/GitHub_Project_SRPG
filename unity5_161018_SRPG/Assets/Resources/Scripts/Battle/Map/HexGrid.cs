@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Point
 {
@@ -43,7 +42,7 @@ public class HexGrid : MonoBehaviour
 {
     // Map Position (x,y,z)
     public Point MapPos;
-    // Hex가 지나갈수있는지 확인
+    // 지나갈수있는가
     public bool Passable = true;
 
     public Color OriColor = Color.white;
