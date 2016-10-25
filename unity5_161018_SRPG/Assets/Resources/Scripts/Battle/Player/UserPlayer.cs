@@ -19,16 +19,16 @@ public class UserPlayer : PlayerBase
         PlayerManager pm = PlayerManager.GetInst();
 
         // 2-06:41분18초
-        // 죽으면(removeTime = 애니메이션 끝나는 1.5초가 되면) 삭제
+        // 죽으면(removeTime = 애니메이션 끝나는 2초가 되면) 삭제
         if (removeTime != 0f)
         {
             removeTime += Time.deltaTime;
-            if (removeTime >= 1.5f)
+            if (removeTime >= 2f)
             {
                 pm.RemovePlayer(this);
-                // turn을 넘기지 않거나, RemovePlayer()전에 넘기면 뭔에러뜸
+                // turn을 넘기지 않거나, RemovePlayer()전에 넘기면 에러뜸
                 pm.NextTurn();
-                //return;
+                return;
             }
         }
 

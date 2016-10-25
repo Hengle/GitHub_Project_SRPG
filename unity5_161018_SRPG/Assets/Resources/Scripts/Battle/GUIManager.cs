@@ -45,7 +45,6 @@ public class GUIManager
                 }
             }
         }
-        //DrawTurnInfo();
     }
 
     // 2-07:15분 UserPlayer에서 복사해옴 / 43분10초부터 GUILayout적용
@@ -142,78 +141,5 @@ public class GUIManager
         }
 
         GUILayout.EndArea();
-    }
-
-    // 2-09:25분50초 Turn순서 캐릭터로 보여주기
-    List<GameObject> players = new List<GameObject>();
-
-    //public void InitTurnInfoMgr()
-    //{
-    //    players = new List<GameObject>();
-    //}
-
-    public void AddTurnPlayer(PlayerBase pb)
-    {
-        GameObject userPlayer = pm.GO_userPlayer;
-        GameObject aiMonster = pm.GO_cyclop;
-
-        if (pb is UserPlayer)
-        {
-            players.Add((GameObject)GameObject.Instantiate(userPlayer, new Vector3(0f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f)));
-        }
-        else if (pb is Monster)
-        {
-            players.Add((GameObject)GameObject.Instantiate(aiMonster, new Vector3(0f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f)));
-        }
-    }
-
-    public void RemoveTurnPlayer(int turnIdx)
-    {
-        // 게임화면상의 turn정보용 캐릭터 오브젝트
-        GameObject obj = players[turnIdx];
-        // players리스트에서 삭제
-        players.RemoveAt(turnIdx);
-        // turn정보용 오브젝트 삭제
-        GameObject.Destroy(obj);
-    }
-
-    float camX;
-    float camY;
-    float camZ;
-    Quaternion turnRot;
-
-    //turn정보 표시
-    public void DrawTurnInfo()
-    {
-        GUILayout.BeginArea(new Rect(0, 0, 370f, 140f), "Turn Info", GUI.skin.window);
-        GUILayout.EndArea();
-
-        int curDraw = pm.CurTurnIdx;
-        // 최대 표시 개수 지정
-        int maxDraw = 5;
-        if (maxDraw > pm.Players.Count)
-        {
-            maxDraw = pm.Players.Count;
-        }
-
-        for (int i = 0; i < maxDraw; i++)
-        {
-            players[curDraw].transform.position = new Vector3(camX + -3.8f + i * 0.8f, camY - 2.7f, camZ + 4.26f);
-            players[i].transform.rotation = turnRot;
-            curDraw++;
-            if (curDraw == pm.Players.Count)
-            {
-                curDraw = 0;
-            }
-        }
-    }
-
-    // 2-10:48분에 수정함
-    public void UpdateTurnInfoPos(Vector3 pos, Quaternion rot)
-    {
-        camX = pos.x;
-        camY = pos.y;
-        camZ = pos.z;
-        turnRot = rot;
     }
 }

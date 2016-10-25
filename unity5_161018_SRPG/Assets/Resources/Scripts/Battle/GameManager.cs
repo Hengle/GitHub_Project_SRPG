@@ -57,12 +57,13 @@ public class GameManager : MonoBehaviour
         pm.GenPlayerTest();
         // 배경음악 시작
         sm.PlayMusic(transform.position);
-        // DamageText를 그려낼 Canvas찾음
-        canvas = GameObject.Find("Canvas");
+        // 전투시작,게임오버,클리어 결과 + DamageText를 그려낼 Canvas찾음
+        canvas = GameObject.Find("ResultOfCombat");
     }
 	
 	void Update ()
     {
+        // 게임이 종료됐다면 return
         if(em.GameEnd == true)
         {   
             return;
@@ -93,8 +94,6 @@ public class GameManager : MonoBehaviour
         {
             // 2-07:18분55초 => 32분40초
             gm.DrawGUI();
-            // 2-09:42분 => 2-10:48분 수정
-            gm.UpdateTurnInfoPos(transform.position, transform.rotation);
         }
     }
 
@@ -135,7 +134,7 @@ public class GameManager : MonoBehaviour
         GetComponent<Camera>().transform.position = new Vector3(destX, GetComponent<Camera>().transform.position.y, destZ -3.5f);
     }
 
-    // TODO : 데미지 텍스트 표시
+    // TODO : 데미지 텍스트 코루틴
     public HexGrid damagedHex;
     public int damage;
     IEnumerator ShowDamage()

@@ -36,9 +36,8 @@ public class PlayerBase : MonoBehaviour
     public ACT act;
     // 사용할 스킬
     public SKILL skillSet = SKILL.NONE;
-
+    // 삭제 시간
     public float removeTime = 0f;
-    public bool activeMobState = true;
     
 	//void Update ()
     //{

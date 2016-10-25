@@ -59,6 +59,15 @@ public class PlayerManager
 
     public void GenPlayerTest()
     {
+        if(Players == null)
+        {
+            Debug.Log("Players 비었음");
+        }
+        else
+        {
+            Debug.Log(Players);
+        }
+        
         // Player 오브젝트 가져옴
         UserPlayer userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
         // Hex정보 초기화(Player생성위치 = x,y,z의 합이 0 이어야 함)
@@ -70,7 +79,7 @@ public class PlayerManager
         // Players[] List에 Player 저장
         Players.Add(userPlayer);
         userPlayer.name = "userPlayer1";
-        //GUIManager.GetInst().AddTurnPlayer(userPlayer);
+        Debug.Log(Players[0]);
         
         Monster monster = ((GameObject)GameObject.Instantiate(GO_cyclop)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(-2, 2, 0);
@@ -78,7 +87,7 @@ public class PlayerManager
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
         monster.name = "aiMonster1";
-        //GUIManager.GetInst().AddTurnPlayer(monster);
+        Debug.Log(Players[1]);
 
         monster = ((GameObject)GameObject.Instantiate(GO_skeleton)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(2, -1, -1);
@@ -86,7 +95,8 @@ public class PlayerManager
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
         monster.name = "aiMonster2";
-        //GUIManager.GetInst().AddTurnPlayer(monster);
+        Debug.Log(Players[2]);
+        Debug.Log("Players : " + Players);
     }
 
     // 넘겨받은 좌표로 Player의 위치를 이동시킴
@@ -153,15 +163,13 @@ public class PlayerManager
     {
         // 2-09:53분
         int pos = Players.IndexOf(pb);
-        // Turn표시 캐릭터 제거
-        //GUIManager.GetInst().RemoveTurnPlayer(pos);
         // userPlayer 제거(이건 list에서 삭제)
-        Players.Remove(pb);
+        Players.RemoveAt(pos);
         // monster 제거(이건 게임화면의 오브젝트 삭제)
-        GameObject.Destroy(pb.gameObject);
+        Object.Destroy(pb.gameObject);
 
-        int enemyCnt = 0;
         int userCnt = 0;
+        int enemyCnt = 0;
         foreach (PlayerBase pb2 in Players)
         {
             if(pb2 is Monster)
@@ -198,24 +206,25 @@ public class PlayerManager
                 return;
             }
 
+            // step 1. skill command가 on일때 기본 command 창으로 회귀
             if (GUIManager.GetInst().skCommand == SKILLWINDOW.ON)
             {
                 Debug.Log(GUIManager.GetInst().skCommand);
                 GUIManager.GetInst().skCommand = SKILLWINDOW.OFF;
             }
 
-            // step 1. idle일때는 할일이 없음
             ACT act = Players[CurTurnIdx].act;
-            if(act == ACT.IDLE)
-            {
-                return;
-            }
-
             // step 2. 상태가 attack이거나 move라면 하이라이트를 초기화하고 idle로 돌림
-            if(act == ACT.MOVEHIGHLIGHT || act == ACT.ATTACKHIGHLIGHT)
+            if (act == ACT.MOVEHIGHLIGHT || act == ACT.ATTACKHIGHLIGHT)
             {
                 Players[CurTurnIdx].act = ACT.IDLE;
                 MapManager.GetInst().ResetMapColor();
+            }
+
+            // step 3. idle일때는 할일 없음
+            if (act == ACT.IDLE)
+            {
+                return;
             }
         }
     }

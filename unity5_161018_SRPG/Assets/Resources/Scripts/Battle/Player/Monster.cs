@@ -17,26 +17,18 @@ public class Monster : PlayerBase
     void Update()
     {
         PlayerManager pm = PlayerManager.GetInst();
-
-        if (activeMobState == true)
+        
+        // 2-06:41분18초
+        // 죽으면(removeTime = 애니메이션 끝나는 2초가 되면) 삭제
+        if (removeTime != 0f)
         {
-            // 2-06:41분18초
-            // 죽으면(removeTime = 애니메이션 끝나는 1.5초가 되면) 삭제
-            if (removeTime != 0f)
+            removeTime += Time.deltaTime;
+            if (removeTime >= 2f)
             {
-                removeTime += Time.deltaTime;
-                if (removeTime >= 1.5f)
-                {
-                    //pm.RemovePlayer(this);
-                    this.gameObject.SetActive(false);
-                    activeMobState = false;
-                    // 2-10:55분
-                    pm.NextTurn();
-                    //return;
-
-                    GameManager.GetInst().ShowStageClear();
-                    EventManager.GetInst().GameEnd = true;
-                }
+                pm.RemovePlayer(this);
+                // 2-10:55분
+                pm.NextTurn();
+                return;
             }
         }
 
