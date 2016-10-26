@@ -59,15 +59,6 @@ public class PlayerManager
 
     public void GenPlayerTest()
     {
-        if(Players == null)
-        {
-            Debug.Log("Players 비었음");
-        }
-        else
-        {
-            Debug.Log(Players);
-        }
-        
         // Player 오브젝트 가져옴
         UserPlayer userPlayer = ((GameObject)GameObject.Instantiate(GO_userPlayer)).GetComponent<UserPlayer>();
         // Hex정보 초기화(Player생성위치 = x,y,z의 합이 0 이어야 함)
@@ -79,7 +70,6 @@ public class PlayerManager
         // Players[] List에 Player 저장
         Players.Add(userPlayer);
         userPlayer.name = "userPlayer1";
-        Debug.Log(Players[0]);
         
         Monster monster = ((GameObject)GameObject.Instantiate(GO_cyclop)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(-2, 2, 0);
@@ -87,7 +77,6 @@ public class PlayerManager
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
         monster.name = "aiMonster1";
-        Debug.Log(Players[1]);
 
         monster = ((GameObject)GameObject.Instantiate(GO_skeleton)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(2, -1, -1);
@@ -95,8 +84,6 @@ public class PlayerManager
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
         monster.name = "aiMonster2";
-        Debug.Log(Players[2]);
-        Debug.Log("Players : " + Players);
     }
 
     // 넘겨받은 좌표로 Player의 위치를 이동시킴

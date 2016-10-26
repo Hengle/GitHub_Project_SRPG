@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     GameObject BattleStartString;
     GameObject PlayerWinString;
     GameObject GameOverString;
-    // 씬 분기
-    int nextTurnIdx = 0;
+    // 씬 분기 인덱스
+    int nextSceneIdx = 0;
 
     private static GameManager inst = null;
     public static GameManager GetInst()
@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerWinString.SetActive(true);
         // 씬 분기
-        nextTurnIdx = 1;
+        nextSceneIdx = 1;
         StartCoroutine(NextScene());
     }
 
@@ -180,18 +180,18 @@ public class GameManager : MonoBehaviour
     {
         GameOverString.SetActive(true);
         // 씬 분기
-        nextTurnIdx = 2;
+        nextSceneIdx = 2;
         StartCoroutine(NextScene());
     }
 
     IEnumerator NextScene()
     {
-        if(nextTurnIdx == 1)
+        if(nextSceneIdx == 1)
         {
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadScene(2);
         }
-        else if(nextTurnIdx == 2)
+        else if(nextSceneIdx == 2)
         {
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadScene(0);
