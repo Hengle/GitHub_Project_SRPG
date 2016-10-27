@@ -101,7 +101,7 @@ GameObject:
   - 136: {fileID: 15678758}
   - 114: {fileID: 15678757}
   - 54: {fileID: 15678756}
-  - 114: {fileID: 15678759}
+  - 143: {fileID: 15678760}
   m_Layer: 0
   m_Name: UserPlayer
   m_TagString: Player
@@ -122,7 +122,7 @@ Transform:
   m_Children:
   - {fileID: 759536962}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!54 &15678756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 49007323}
+  rotateSpeed: 1
+  forwardSpeed: 1
 --- !u!136 &15678758
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -163,20 +165,23 @@ CapsuleCollider:
   m_Height: 1.1
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
---- !u!114 &15678759
-MonoBehaviour:
+--- !u!143 &15678760
+CharacterController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 15678754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &49007321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1770,7 @@ GameObject:
   - 223: {fileID: 381654028}
   - 114: {fileID: 381654027}
   - 114: {fileID: 381654026}
+  - 114: {fileID: 381654030}
   m_Layer: 5
   m_Name: Canvas_UI
   m_TagString: Untagged
@@ -1818,9 +1824,9 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1500626682}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1841,12 +1847,23 @@ RectTransform:
   m_Children:
   - {fileID: 49007322}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &381654030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381654025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3906e4e1b2d60408bb132eff9dbec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &397768414
 Prefab:
   m_ObjectHideFlags: 0
@@ -1884,7 +1901,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454828, guid: 903731982a6595e4299dd4b836d8bb1c, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 903731982a6595e4299dd4b836d8bb1c, type: 2}
@@ -2046,7 +2063,7 @@ Transform:
   m_Children:
   - {fileID: 971391886}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &1452084725 stripped
 Transform:
   m_PrefabParentObject: {fileID: 406376, guid: ed45c8fd95b5f87488a27282303591b9, type: 2}
@@ -2146,6 +2163,7 @@ MonoBehaviour:
   maxViewDistance: 6
   minViewDistance: 1
   zoomRate: 30
+  cameraTargetHeight: 1
 --- !u!1 &1605853189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,7 +2264,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 453044, guid: c132ad5c4175f724faa0d967cda32bea, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c132ad5c4175f724faa0d967cda32bea, type: 2}
@@ -3677,7 +3695,7 @@ Transform:
   m_Children:
   - {fileID: 1452084725}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!114 &1714995554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3736,7 +3754,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319.5, y: -212.3}
+  m_AnchoredPosition: {x: 317.9, y: -208.5}
   m_SizeDelta: {x: 101.1, y: 34.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966144054
@@ -3759,8 +3777,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.7794118, g: 0.7794118, b: 0.7794118, a: 1}
+    m_PressedColor: {r: 0.5588235, g: 0.5588235, b: 0.5588235, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3777,7 +3795,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1966144055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 381654030}
+        m_MethodName: InventoryOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1966144055
@@ -3912,7 +3941,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 416070, guid: a8e9d2b87b155c94c86cdfa18f83aba5, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8e9d2b87b155c94c86cdfa18f83aba5, type: 2}
@@ -3954,7 +3983,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 484472, guid: b04fedbb2fb098746b1b218a0a96b808, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b04fedbb2fb098746b1b218a0a96b808, type: 2}
