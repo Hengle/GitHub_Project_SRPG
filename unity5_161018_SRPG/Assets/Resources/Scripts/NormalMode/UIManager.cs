@@ -3,68 +3,84 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    // 각종 Window들
     public GameObject inventory;
     public GameObject skilltree;
     public GameObject status;
     public GameObject setup;
 
-    // Use this for initialization
-    void Start()
+    // 창 드래그 이동 좌표
+    private float offsetX;
+    private float offsetY;
+    
+    public void BeginDrag()
     {
-
+        offsetX = transform.position.x - Input.mousePosition.x;
+        offsetY = transform.position.y - Input.mousePosition.y;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDrag()
     {
-
+        transform.position = new Vector3(offsetX + Input.mousePosition.x, offsetY + Input.mousePosition.y, 0f);
     }
 
-    public void InventoryOpen()
+    public void ToggleInventory()
     {
-        Debug.Log("Inventory Open.");
-        inventory.SetActive(true);
+        if (inventory == null)
+        {
+            return;
+        }   
+
+        // 현재 인벤토리창의 활성화 상태 정보를 얻어 온다.
+        bool flag = inventory.activeSelf;
+        // 활성화 상태값의 반대 값으로 설정한다.
+        inventory.SetActive(!flag);
+
+        //if (!flag == true)
+        //{
+        //    inventory.GetComponent<InventoryManager>().InitializeItemInfo();
+        //}
     }
 
-    public void InventoryClose()
+    public void ToggleSkillTree()
     {
-        Debug.Log("Inventory Close.");
-        inventory.SetActive(false);
+        Debug.Log("Toggle SkillTree Window !");
+        if (skilltree == null)
+        {
+            return;
+        }
+
+        // 현재 인벤토리창의 활성화 상태 정보를 얻어 온다.
+        bool flag = skilltree.activeSelf;
+        // 활성화 상태값의 반대 값으로 설정한다.
+        skilltree.SetActive(!flag);
+    }
+    
+    public void ToggleStatus()
+    {
+        Debug.Log("Toggle Status Window !");
+        if (status == null)
+        {
+            return;
+        }
+
+        // 현재 인벤토리창의 활성화 상태 정보를 얻어 온다.
+        bool flag = status.activeSelf;
+        // 활성화 상태값의 반대 값으로 설정한다.
+        status.SetActive(!flag);
     }
 
-    public void SkillTreeOpen()
+    public void ToggleSetUp()
     {
-        Debug.Log("SkillTree Open.");
-        skilltree.SetActive(true);
-    }
+        Debug.Log("Toggle Setup Window !");
+        if (setup == null)
+        {
+            return;
+        }
 
-    public void SkillTreeClose()
-    {
-        Debug.Log("SkillTree Close.");
-        skilltree.SetActive(false);
-    }
-
-    public void StatusOpen()
-    {
-        Debug.Log("Status Open.");
-        status.SetActive(true);
-    }
-
-    public void StatusClose()
-    {
-        Debug.Log("Status Close.");
-        status.SetActive(false);
-    }
-
-    public void SetUpOpen()
-    {
-        Debug.Log("Setup Open.");
-        setup.SetActive(true);
-    }
-
-    public void SetUpClose()
-    {
-        Debug.Log("Setup Close.");
-        setup.SetActive(false);
+        // 현재 인벤토리창의 활성화 상태 정보를 얻어 온다.
+        bool flag = setup.activeSelf;
+        // 활성화 상태값의 반대 값으로 설정한다.
+        setup.SetActive(!flag);
     }
 }

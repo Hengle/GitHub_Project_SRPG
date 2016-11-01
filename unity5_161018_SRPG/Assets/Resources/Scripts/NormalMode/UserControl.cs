@@ -33,7 +33,7 @@ public class UserControl : MonoBehaviour
     void Start()
     {
         // 플레이어의 애니메이터 컴포넌트 저장
-        animator = GameObject.Find("UserPlayer").GetComponentInChildren<Animator>();
+        animator = GameObject.Find("Samurai(Player)").GetComponentInChildren<Animator>();
 
         // 플레이어의 캐릭터 컨트롤러 컴포넌트 저장
         playerController = GetComponent<CharacterController>();

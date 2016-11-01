@@ -9,6 +9,7 @@ TagManager:
   - PlayerWin
   - GameOver
   - Effect
+  - Window
   layers:
   - Default
   - TransparentFX

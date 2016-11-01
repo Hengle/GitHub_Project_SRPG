@@ -120,8 +120,8 @@ public class GameManager : MonoBehaviour
         // TODO : 마우스 우클릭하면 하이라이트 상태 취소(IDLE 상태로 복귀)
         if(Input.GetMouseButtonDown(1))
         {
-            Debug.Log("mouse right button down");
-            Debug.Log(GUIManager.GetInst().skCommand);
+            Debug.Log("Mouse Right Button Down.");
+            Debug.Log("skill Command : " + GUIManager.GetInst().skCommand);
             pm.MouseInputProc(1);
         }
     }

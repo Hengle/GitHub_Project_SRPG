@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.EventSystems;     // PointerEventData와 RaycastResult 사용
+using UnityEngine.UI;               // GraphicRaycaster 사용
+using System.Collections.Generic;   // List 사용
 
 public class FollowCam : MonoBehaviour
 {
     // 카메라가 쫒을 타겟
     public Transform cameraTarget;
-
     private float x = 0.0f;
     private float y = 0.0f;
+
     // 화면 회전 속도(마우스 기준)
     private int mouseXSpeedmod = 5;
     private int mouseYSpeedmod = 3;
@@ -28,7 +30,13 @@ public class FollowCam : MonoBehaviour
     private float currentDistance;
     // 플레이어의 
     public float cameraTargetHeight = 1.0f;
-    
+
+    // Raycast가 될 캔버스 
+    public Canvas canvas; 
+    private GraphicRaycaster gr;
+    private PointerEventData ped;
+
+
     // Use this for initialization
     void Start ()
     {
@@ -39,10 +47,32 @@ public class FollowCam : MonoBehaviour
         currentDistance = distance;
         desiredDistance = distance;
         correctedDistance = distance;
+
+        // 캔버스에 대한 Raycast를 사용하기위한 컴포넌트 저장
+        gr = canvas.GetComponent<GraphicRaycaster>();
+        // 마우스 포인터 이벤트
+        ped = new PointerEventData(null);
     }
 	
 	void LateUpdate ()
     {
+        // 현재 포인터의 위치는 마우스 클릭 포지션임
+        ped.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>(); // 여기에 히트 된 개체 저장 
+        gr.Raycast(ped, results);
+
+        // results에 개체가 들어오면
+        if(results.Count != 0)
+        {
+            GameObject obj = results[0].gameObject;
+            if(obj.CompareTag("Window")) // 히트 된 오브젝트의 태그와 맞으면 실행 
+            {
+                //Debug.Log("Inventory Window hit !");
+                // 선택한 창만 움직이고, 하위 코드는 실행하지 않는다(return)
+                return;
+            }
+        }
+
         // 마우스 왼쪽(0)버튼 누르고 드래그하면 카메라 회전
         if(Input.GetMouseButton(0))
         {
@@ -51,7 +81,7 @@ public class FollowCam : MonoBehaviour
             x += Input.GetAxis("Mouse X") * mouseXSpeedmod;
             y -= Input.GetAxis("Mouse Y") * mouseYSpeedmod;
         }
-        else if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             // 카메라 = 캐릭터가 바라보는 방향으로 따라다님
             float targetRotationAngle = cameraTarget.eulerAngles.y;
@@ -72,12 +102,12 @@ public class FollowCam : MonoBehaviour
         Vector3 positions = cameraTarget.position - (rotations * Vector3.forward * desiredDistance);
 
 
-        // ==============코드해석해야됨============================
+        // =========================코드해석해야됨============================
         RaycastHit collisionHit;
         Vector3 cameraTargetPosition = new Vector3(cameraTarget.position.x, cameraTarget.position.y + cameraTargetHeight, cameraTarget.position.z);
 
         bool isCorrected = false;
-        if (Physics.Linecast(cameraTargetPosition, positions, out collisionHit))
+        if(Physics.Linecast(cameraTargetPosition, positions, out collisionHit))
         {
             positions = collisionHit.point;
             correctedDistance = Vector3.Distance(cameraTargetPosition, positions);
@@ -88,8 +118,9 @@ public class FollowCam : MonoBehaviour
         currentDistance = !isCorrected || correctedDistance > currentDistance ? Mathf.Lerp(currentDistance, correctedDistance, Time.deltaTime * zoomRate) : correctedDistance;
 
         positions = cameraTarget.position - (rotations * Vector3.forward * currentDistance + new Vector3());
-        // ========================================================
-        positions.y += 1f;
+        // ===================================================================
+
+        positions.y += 1f; // 카메라가 너무 바닥에 붙어서 살짝 올림.
 
         // Main Camera의 rotations 적용
         transform.rotation = rotations;
