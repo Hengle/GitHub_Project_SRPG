@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
         if(nextSceneIdx == 1)
         {
             yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
         else if(nextSceneIdx == 2)
         {
