@@ -11,7 +11,12 @@ public class LoginManager : MonoBehaviour
     public InputField uid;
     public InputField upw;
 
-    // test용 update
+    void Start()
+    {
+        ItemData.Instance.LoadTable();
+    }
+
+    // UI 구성 전, Test용 Update()
     //void Update()
     //{
     //    if (Input.GetKeyDown(KeyCode.A))
@@ -137,5 +142,39 @@ public class LoginManager : MonoBehaviour
         GameData.Instance.invenInfo = data.inventory;
 
         Debug.Log("Completed to save inventory info !!");
+    }
+
+    public void RequestGetItemInfo()
+    {
+        int item_id = 11311001;
+        ITEM item = ItemData.Instance.GetInfo(item_id);
+        if(item != null)
+        {
+            Debug.Log("ItemData에서 확인한 아이템 정보: " + item.name);
+        }
+
+        Dictionary<string, object> sendData = new Dictionary<string, object>();
+        sendData.Add("contents", "get_item_info");
+        sendData.Add("item_id", item_id);
+
+        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyGetItemInfo));
+    }
+
+    private class RecvGetItemInfoData
+    {
+        public string message;
+        public int timestamp;
+    }
+
+    public void ReplyGetItemInfo(string json)
+    {
+        RecvGetItemInfoData data = JsonReader.Deserialize<RecvGetItemInfoData>(json);
+
+        DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(data.timestamp);
+        Debug.Log(data.message + (origin.ToLocalTime()).ToString(" 응답시간 yyyy-MM-dd-tt HH:mm:s"));
+
+        //GameData.Instance.invenInfo = data.item;
+
+        Debug.Log("Completed to save item info !!");
     }
 }

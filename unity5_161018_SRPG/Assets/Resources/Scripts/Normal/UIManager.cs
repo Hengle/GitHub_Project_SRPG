@@ -29,17 +29,17 @@ public class UIManager : MonoBehaviour
         if (inventory == null)
         {
             return;
-        }   
+        }
 
         // 현재 인벤토리창의 활성화 상태 정보를 얻어 온다.
         bool flag = inventory.activeSelf;
         // 활성화 상태값의 반대 값으로 설정한다.
         inventory.SetActive(!flag);
-
-        //if (!flag == true)
-        //{
-        //    inventory.GetComponent<InventoryManager>().InitializeItemInfo();
-        //}
+        // 
+        if (!flag == true)
+        {
+            inventory.GetComponentInChildren<InventoryManager>().InitializeItemInfo();
+        }
     }
 
     public void ToggleSkillTree()

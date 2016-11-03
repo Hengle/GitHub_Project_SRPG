@@ -65,7 +65,7 @@ public class FollowCam : MonoBehaviour
         if(results.Count != 0)
         {
             GameObject obj = results[0].gameObject;
-            if(obj.CompareTag("Window") || obj.CompareTag("Inventory")) // 히트 된 오브젝트의 태그와 맞으면 실행 
+            if(obj.CompareTag("Window")) // 히트 된 오브젝트의 태그와 맞으면 실행
             {
                 //Debug.Log("Inventory Window hit !");
                 // 선택한 창만 움직이고, 하위 코드는 실행하지 않는다(return)
