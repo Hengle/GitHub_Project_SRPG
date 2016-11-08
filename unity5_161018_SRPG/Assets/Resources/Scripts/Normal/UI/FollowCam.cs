@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;     // PointerEventData와 RaycastResult 사용
 using UnityEngine.UI;               // GraphicRaycaster 사용
 using System.Collections.Generic;   // List 사용
+using System;
 
 public class FollowCam : MonoBehaviour
 {
@@ -36,7 +37,6 @@ public class FollowCam : MonoBehaviour
     private GraphicRaycaster gr;
     private PointerEventData ped;
 
-
     // Use this for initialization
     void Start ()
     {
@@ -62,10 +62,10 @@ public class FollowCam : MonoBehaviour
         gr.Raycast(ped, results);
 
         // results에 개체가 들어오면
-        if(results.Count != 0)
+        if (results.Count != 0)
         {
             GameObject obj = results[0].gameObject;
-            if(obj.CompareTag("Window")) // 히트 된 오브젝트의 태그와 맞으면 실행
+            if (obj.CompareTag("Window") || obj.CompareTag("Item")) // 히트 된 오브젝트의 태그와 맞으면 실행
             {
                 //Debug.Log("Inventory Window hit !");
                 // 선택한 창만 움직이고, 하위 코드는 실행하지 않는다(return)
@@ -74,7 +74,7 @@ public class FollowCam : MonoBehaviour
         }
 
         // 마우스 왼쪽(0)버튼 누르고 드래그하면 카메라 회전
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             //Debug.Log("Mouse X: " + Input.GetAxis("Mouse X"));
             //Debug.Log("Mouse Y: " + Input.GetAxis("Mouse Y"));
@@ -107,7 +107,7 @@ public class FollowCam : MonoBehaviour
         Vector3 cameraTargetPosition = new Vector3(cameraTarget.position.x, cameraTarget.position.y + cameraTargetHeight, cameraTarget.position.z);
 
         bool isCorrected = false;
-        if(Physics.Linecast(cameraTargetPosition, positions, out collisionHit))
+        if (Physics.Linecast(cameraTargetPosition, positions, out collisionHit))
         {
             positions = collisionHit.point;
             correctedDistance = Vector3.Distance(cameraTargetPosition, positions);

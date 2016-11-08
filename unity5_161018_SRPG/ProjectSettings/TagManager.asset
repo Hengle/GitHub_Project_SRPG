@@ -10,6 +10,7 @@ TagManager:
   - GameOver
   - Effect
   - Window
+  - Item
   layers:
   - Default
   - TransparentFX

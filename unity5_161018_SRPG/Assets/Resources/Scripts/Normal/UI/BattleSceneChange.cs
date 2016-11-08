@@ -12,13 +12,7 @@ public class BattleSceneChange : MonoBehaviour
     private float time = 0f;
     // 페이드 On/Off
     private bool fadeSet = true;
-
-    // Use this for initialization
-    void Start ()
-    {
-	
-	}
-	
+    
 	// Update is called once per frame
 	void Update ()
     {

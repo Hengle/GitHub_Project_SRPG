@@ -1,19 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public static GameObject itemBeingDragged;
+    public static GameObject itemBeingDragged = null;
     Vector3 startPosition;
     Transform startParent;
+
+    public GameObject mainCamere;
+    public Text itemText;
+
+    // Use this for initialization
+    void Start()
+    {
+        itemText.text = gameObject.GetComponent<Image>().sprite.name;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         itemBeingDragged = gameObject;
         startPosition = transform.position;
         startParent = transform.parent;
-        // 이게 뭐야
-        GetComponent<CanvasGroup>().blocksRaycasts = false; 
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        // 메인카메라에 붙은 FollowCam 컴포넌트 끔
+        mainCamere.GetComponent<FollowCam>().enabled = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -25,7 +36,9 @@ public class ItemHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         itemBeingDragged = null;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if(transform.parent != startParent)
+        // 메인카메라에 붙은 FollowCam 컴포넌트 켬
+        mainCamere.GetComponent<FollowCam>().enabled = true;
+        if (transform.parent != startParent)
         {
             transform.position = startPosition;
         }

@@ -106,6 +106,7 @@ public class ItemData
         {
             string path = Application.dataPath.Substring(0, Application.dataPath.Length - 5);
             path = path.Substring(0, path.LastIndexOf('/'));
+            // 왜 내꺼만 System.IO에 접근이 안되는가.. 일단 수동(강제?)적으로 Path앞에 붙여서 해결
             return System.IO.Path.Combine(System.IO.Path.Combine(path, "Documents"), fileName);
         }
         else if(Application.platform == RuntimePlatform.Android) // Android에서 경로를 얻어온다
@@ -158,7 +159,7 @@ public class ItemData
                 int key = int.Parse(temp[0]);
                 table.Add(key, new ITEM
                 {
-                    id = int.Parse(temp[0]),
+                id = int.Parse(temp[0]),
                 attack = int.Parse(temp[6]),
                 defence = int.Parse(temp[7]),
                 //durability = int.Parse(temp[8]),
@@ -178,15 +179,16 @@ public class ItemData
                 sound = temp[22],
                 effect = temp[23]
                 });
-                Debug.Log("table에 데이터 등록: " + temp[0]);
+                Debug.Log("Dictionary table에 item_table.csv 데이터 등록(temp[0]): " + temp[0]);
             } // end foreach()
         } // end while()
         st.Close();
         file.Close();
 
-        Debug.Log("파일 읽기 완료 [ " + path + " ]");
+        Debug.Log("파일 읽기 완료 [" + path + "]");
     }
 
+    // key는 곧 아이템 아이디
     public ITEM GetInfo(int key)
     {
         // 해당하는 키의 아이템이 존재하면 아이템 정보를 리턴한다
@@ -194,14 +196,14 @@ public class ItemData
         {
             return table[key];
         }
-        // 해당하는 키의 아이템이 없으면 null 리턴
+        // 해당 키의 아이템이 없으면 null 리턴
         return null;
     }
 }
 
 public class ITEM
 {
-    public int id;              // 성별, 타입, 직업, 등급, 인덱스
+    public int id;         // 성별, 타입, 직업, 등급, 인덱스
 
     public int attack;          // 공격력
     public int defence;         // 방어력
@@ -209,13 +211,13 @@ public class ITEM
     public int fire_regist;     // 화염 저항
     public int ice_regist;      // 냉기 저항
     public int regeneration;    // 회복력
-    public float cooltime;        // 쿨타임
+    public float cooltime;      // 쿨타임
     public int weight;          // 무게
     public int level;           // 허용 레벨
     public int price;           // 가격
     public int skill_01;        // 스킬 번호
     public int skill_02;        // "
-    public int overlap;        // 중첩 가능 여부
+    public int overlap;         // 중첩 가능 여부
     public int count;           // 아이템 개수 
     public string name;         // 아이템 이름
     public string description;  // 아이템 설명

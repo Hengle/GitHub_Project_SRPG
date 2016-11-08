@@ -1,29 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class UIManager : MonoBehaviour
+public class ToggleWindow : MonoBehaviour
 {
     // 각종 Window들
     public GameObject inventory;
     public GameObject skilltree;
     public GameObject status;
     public GameObject setup;
-
-    // 창 드래그 이동 좌표
-    private float offsetX;
-    private float offsetY;
     
-    public void BeginDrag()
-    {
-        offsetX = transform.position.x - Input.mousePosition.x;
-        offsetY = transform.position.y - Input.mousePosition.y;
-    }
-
-    public void OnDrag()
-    {
-        transform.position = new Vector3(offsetX + Input.mousePosition.x, offsetY + Input.mousePosition.y, 0f);
-    }
-
     public void ToggleInventory()
     {
         if (inventory == null)
@@ -35,11 +19,11 @@ public class UIManager : MonoBehaviour
         bool flag = inventory.activeSelf;
         // 활성화 상태값의 반대 값으로 설정한다.
         inventory.SetActive(!flag);
-        // 
-        if (!flag == true)
-        {
-            inventory.GetComponentInChildren<InventoryManager>().InitializeItemInfo();
-        }
+        // 인벤토리창이 열리면 InitializeItemInfo() 실행.
+        //if (!flag == true)
+        //{
+        //    inventory.GetComponentInChildren<InventoryManager>().InitializeItemInfo();
+        //}
     }
 
     public void ToggleSkillTree()
@@ -52,7 +36,7 @@ public class UIManager : MonoBehaviour
         bool flag = skilltree.activeSelf;
         skilltree.SetActive(!flag);
     }
-    
+
     public void ToggleStatus()
     {
         Debug.Log("Toggle Status Window !");

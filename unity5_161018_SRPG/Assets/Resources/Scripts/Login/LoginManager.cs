@@ -17,19 +17,36 @@ public class LoginManager : MonoBehaviour
     }
 
     // UI 구성 전, Test용 Update()
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.A))
-    //    {
-    //        GameData.Instance.charInfo.char_id = 4;
-    //        RequestGetCharacterInfo();
-    //        RequestGetInventoryInfo();
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.S))
-    //    {
-    //        Debug.Log("Skill Data Count: " + GameData.Instance.charInfo.skill.Count);
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            GameData.Instance.charInfo.char_id = 4;
+            RequestGetCharacterInfo();
+            RequestGetInventoryInfo();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("Skill Data Count: " + GameData.Instance.charInfo.skill.Count);
+        }
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            ITEM item = ItemData.Instance.GetInfo(11311001);
+            if (item != null)
+            {
+                Debug.Log("ItemData로 확인한 아이템 정보: " + item.name);
+                Debug.Log(item.description);
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            RequestGetItemInfo(11211001);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            RequestSetBuyItem(13211001);
+        }
+    }
 
     public void RequestLogin()
     {
@@ -45,8 +62,6 @@ public class LoginManager : MonoBehaviour
         // "query_value", inputfield.text
         sendData.Add("id", uid.text);
         sendData.Add("pw", upw.text);
-        //sendData.Add("id", id.value);
-        //sendData.Add("pw", pw.value);
 
         StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyLogin));
     }
@@ -94,6 +109,7 @@ public class LoginManager : MonoBehaviour
         public int stat_df;
         public List<int> skill = new List<int>();
         public List<int> equip_item = new List<int>();
+        public int gold;
     }
 
     public void ReplyGetCharacterInfo(string json)
@@ -112,8 +128,9 @@ public class LoginManager : MonoBehaviour
         GameData.Instance.charInfo.stat_df = data.stat_df;
         GameData.Instance.charInfo.skill = data.skill;
         GameData.Instance.charInfo.equip_item = data.equip_item;
+        GameData.Instance.charInfo.gold = data.gold;
 
-        Debug.Log("Completed to save game info !!");
+        Debug.Log("Completed to save game info !! " + data.gold + " Gold");
     }
 
     public void RequestGetInventoryInfo()
@@ -144,15 +161,8 @@ public class LoginManager : MonoBehaviour
         Debug.Log("Completed to save inventory info !!");
     }
 
-    public void RequestGetItemInfo()
+    public void RequestGetItemInfo(int item_id)
     {
-        int item_id = 11311001;
-        ITEM item = ItemData.Instance.GetInfo(item_id);
-        if(item != null)
-        {
-            Debug.Log("ItemData에서 확인한 아이템 정보: " + item.name);
-        }
-
         Dictionary<string, object> sendData = new Dictionary<string, object>();
         sendData.Add("contents", "get_item_info");
         sendData.Add("item_id", item_id);
@@ -164,6 +174,7 @@ public class LoginManager : MonoBehaviour
     {
         public string message;
         public int timestamp;
+        public ITEM item;
     }
 
     public void ReplyGetItemInfo(string json)
@@ -173,8 +184,49 @@ public class LoginManager : MonoBehaviour
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(data.timestamp);
         Debug.Log(data.message + (origin.ToLocalTime()).ToString(" 응답시간 yyyy-MM-dd-tt HH:mm:s"));
 
-        //GameData.Instance.invenInfo = data.item;
-
+        Debug.Log("Item ID: " + data.item.id);
+        Debug.Log("Item Attack: " + data.item.attack);
+        Debug.Log("Item Defence: " + data.item.defence);
+        Debug.Log("Item Name: " + data.item.name);
+        Debug.Log("Item Description: " + data.item.description);
         Debug.Log("Completed to save item info !!");
+    }
+
+    public void RequestSetBuyItem(int item_id)
+    {
+        Dictionary<string, object> sendData = new Dictionary<string, object>();
+        sendData.Add("contents", "set_buy_item");
+        sendData.Add("char_id", GameData.Instance.charInfo.char_id);
+        sendData.Add("item_id", item_id);
+
+        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplySetBuyItem));
+    }
+
+    private class RecvSetBuyItemData
+    {
+        public string message;
+        public int timestamp;
+        public int item_id;
+        public int slot;
+        public int gold;
+    }
+
+    public void ReplySetBuyItem(string json)
+    {
+        RecvSetBuyItemData data = JsonReader.Deserialize<RecvSetBuyItemData>(json);
+
+        DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(data.timestamp);
+        Debug.Log(data.message + (origin.ToLocalTime()).ToString(" 응답시간 yyyy-MM-dd-tt HH:mm:s"));
+
+        GameData.Instance.charInfo.gold = data.gold;
+        GameData.Instance.invenInfo[data.slot].item_id = data.item_id;
+        GameData.Instance.invenInfo[data.slot].item_count = 1;
+
+        ITEM item = ItemData.Instance.GetInfo(data.item_id);
+        if(item != null)
+        {
+            Debug.Log(item.name + "가(이) " + item.price + "가격에 구매 됐습니다.");
+            Debug.Log("아이템 설명: " + item.description);
+        }
     }
 }
