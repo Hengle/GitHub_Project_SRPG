@@ -3,7 +3,7 @@ using System; // DateTime
 using System.Collections.Generic; // Dictionary
 using JsonFx.Json; // JsonReader
 using UnityEngine.SceneManagement; // SceneManager
-using UnityEngine.UI; // InputField -> NGUI 안써보려고..
+using UnityEngine.UI; // InputField -> NGUI 안써.
 
 public class LoginManager : MonoBehaviour
 {
@@ -46,6 +46,41 @@ public class LoginManager : MonoBehaviour
         {
             RequestSetBuyItem(13211001);
         }
+    }
+
+    public void RequestJoin()
+    {
+        if (uid.text.Length < 4 || upw.text.Length < 4)
+        {
+            Debug.Log("ID, Password는 4글자 이상입니다. 확인하고 재시도 바랍니다.");
+            return;
+        }
+
+        Dictionary<string, object> sendData = new Dictionary<string, object>();
+        sendData.Add("contents", "new_id");
+        sendData.Add("id", uid.text);
+        sendData.Add("pw", upw.text);
+
+        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyJoin));
+    }
+
+    private class RecvJoinData
+    {
+        public int accountID;       // DB에 저장된 Index
+        public int timestamp;       // DB system
+        public string message;
+    }
+
+    public void ReplyJoin(string json)
+    {
+        // JSON Data 변환
+        RecvLoginData data = JsonReader.Deserialize<RecvLoginData>(json);
+        // 서버 접속에 성공한 시간
+        DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(data.timestamp);
+        // origin : 영국 그리니치 천문대 시간
+        Debug.Log((origin.ToLocalTime()).ToString("yyyy년 MM월 dd일의 tt HH시 mm분 s초에 회원가입됐습니다."));
+
+        RequestLogin();
     }
 
     public void RequestLogin()

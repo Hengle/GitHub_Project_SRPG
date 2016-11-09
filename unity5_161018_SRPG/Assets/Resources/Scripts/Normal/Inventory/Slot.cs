@@ -23,17 +23,4 @@ public class Slot : MonoBehaviour, IDropHandler
             ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
         }
     }
-
-    void Start()
-    {
-        Debug.Log(transform.position);
-    }
-
-    //void Update()
-    //{
-    //    if(item != null)
-    //    {
-    //        Debug.Log(item);
-    //    }
-    //}
 }

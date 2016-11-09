@@ -179,7 +179,7 @@ public class ItemData
                 sound = temp[22],
                 effect = temp[23]
                 });
-                Debug.Log("Dictionary table에 item_table.csv 데이터 등록(temp[0]): " + temp[0]);
+                Debug.Log("table <Dictionary>에 'item_table.csv' 데이터 등록(temp[0]): " + temp[0]);
             } // end foreach()
         } // end while()
         st.Close();

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public class ToggleWindow : MonoBehaviour
+public class ToggleUI : MonoBehaviour
 {
-    // 각종 Window들
+    // 각종 Windows Object
     public GameObject inventory;
     public GameObject skilltree;
     public GameObject status;
     public GameObject setup;
-    
+
     public void ToggleInventory()
     {
         if (inventory == null)

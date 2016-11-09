@@ -110,6 +110,7 @@ public class UserControl : MonoBehaviour
         if(col.tag == "Monster")
         {
             Debug.Log("적 조우 !!!");
+            // 씬 페이드 아웃 flag
             fadeSet = false;
             SoundManager.GetInst().PlayBattleBuzzer(this.transform.position);
         }
