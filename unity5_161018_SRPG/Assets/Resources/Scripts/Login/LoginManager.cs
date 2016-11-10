@@ -66,8 +66,9 @@ public class LoginManager : MonoBehaviour
 
     private class RecvJoinData
     {
-        public int accountID;       // DB에 저장된 Index
-        public int timestamp;       // DB system
+        public int id;
+        public int pw;
+        public int timestamp;
         public string message;
     }
 
@@ -116,7 +117,7 @@ public class LoginManager : MonoBehaviour
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(data.timestamp);
 
         Debug.Log(data.message);
-        Debug.Log((origin.ToLocalTime()).ToString("yyyy년 MM월 dd일의 tt HH시 mm분 s초에 로그인 했습니다."));
+        Debug.Log((origin.ToLocalTime()).ToString("yyyy년 MM월 dd일의 tt HH시 mm분 s초에 로그인했습니다."));
 
         SceneManager.LoadScene(1);
     }

@@ -91,6 +91,7 @@ public class NetworkManagerEX : MonoBehaviour
                         case 1008: DialogOpen("아이템 정보를 찾을 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
                         case 1009: DialogOpen("골드가 부족합니다. \n확인하고 다시 시도하시기 바랍니다."); break;
                         case 1010: DialogOpen("인벤토리에 빈 슬롯이 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1011: DialogOpen("아이디 생성에 실패했습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
                     }
                 }
                 // 실제 처리 결과물

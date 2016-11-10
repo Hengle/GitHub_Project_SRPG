@@ -119,25 +119,11 @@ public class GUIManager
         }
         if (GUILayout.Button("Skill 3"))
         {
-            skCommand = SKILLWINDOW.OFF;
-            if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
-            {
-                skCommand = SKILLWINDOW.OFF;
-                // HIGHLIGHT로 상태 전환
-                pb.act = ACT.ATTACKHIGHLIGHT;
-                pb.skillSet = SKILL.SKILL3;
-            }
+            
         }
         if (GUILayout.Button("Skill 4"))
         {
-            skCommand = SKILLWINDOW.OFF;
-            if (MapManager.GetInst().HighlightAtkRange(pb.CurHex, pb.status.AtkRange) == true)
-            {
-                skCommand = SKILLWINDOW.OFF;
-                // HIGHLIGHT로 상태 전환
-                pb.act = ACT.ATTACKHIGHLIGHT;
-                pb.skillSet = SKILL.SKILL4;
-            }
+            
         }
 
         GUILayout.EndArea();
