@@ -1,22 +1,20 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿
 public class PlayerStatus
 {
-    public string Name = "test";
+    public string Name;
     // userPlayer HP
-    public int CurHP = 30;
+    public int CurHP;
     // Player 이동범위 한정
-    public int MoveRange = 3;
+    public int MoveRange;
     // Player 공격범위 한정
-    public int AtkRange = 1;
+    public int AtkRange;
     // Player 이동속도
-    public float MoveSpeed = 5f;
-    
+    public float MoveSpeed;
+    // 생성자
     public PlayerStatus()
     {
         Name = "test";
-        CurHP = 50;
+        CurHP = 40;
         MoveRange = 3;
         AtkRange = 1;
         MoveSpeed = 5f;

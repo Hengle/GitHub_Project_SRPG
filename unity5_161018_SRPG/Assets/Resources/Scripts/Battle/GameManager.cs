@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         // 배경음악 시작
         sm.PlayMusic(transform.position);
         // 전투시작,게임오버,클리어 결과 + DamageText를 그려낼 Canvas찾음
-        canvas = GameObject.Find("ResultOfCombat");
+        canvas = GameObject.Find("Result");
     }
 	
 	void Update ()

@@ -10,10 +10,10 @@ public class Monster : PlayerBase
         act = ACT.IDLE;
         // Player의 status정보 가져옴
         status = new PlayerStatus();
-        // 
+        // 애니메이터 컴포넌트
         ani = GetComponent<Animator>();
     }
-    
+
     void Update()
     {
         PlayerManager pm = PlayerManager.GetInst();

@@ -66,9 +66,9 @@ public class BattleManager
     {
         // Monster skillState 랜덤 변경(skillSet을 하나만 쓰기때문에 먼저 셋팅하는거임)
         int a = Random.Range(0, 2);
-        Debug.Log("mob random skill : " + a);
         if(attacker.tag == "Monster")
         {
+            Debug.Log("mob random skill : " + a);
             if (a <= 0)
             {
                 skillState = SKILL.NONE;

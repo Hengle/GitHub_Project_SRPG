@@ -68,21 +68,21 @@ public class PlayerManager
         userPlayer.transform.position = userPlayer.CurHex.transform.position;
         // Players[] List에 Player 저장
         Players.Add(userPlayer);
-        userPlayer.name = "userPlayer1";
+        userPlayer.name = "Samurai";
         
         Monster monster = ((GameObject)GameObject.Instantiate(GO_cyclop)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(-2, 2, 0);
         monster.CurHex = hex;
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
-        monster.name = "aiMonster1";
+        monster.name = "Cyclops";
 
         monster = ((GameObject)GameObject.Instantiate(GO_skeleton)).GetComponent<Monster>();
         hex = MapManager.GetInst().GetPlayerHex(2, -1, -1);
         monster.CurHex = hex;
         monster.transform.position = monster.CurHex.transform.position;
         Players.Add(monster);
-        monster.name = "aiMonster2";
+        monster.name = "Skeleton";
     }
 
     // 넘겨받은 좌표로 Player의 위치를 이동시킴

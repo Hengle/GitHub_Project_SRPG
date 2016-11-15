@@ -67,7 +67,6 @@ public class UserPlayer : PlayerBase
             }
         }
     }
-
     // 2-05 => 2-07로 넘어가면서 GUI스크립트 따로 분출(그러면서 PlayerBase의 virtual & PlayerManager의 OnGUI도 같이 주석처리)
     //public override void DrawStatus()
     //{
