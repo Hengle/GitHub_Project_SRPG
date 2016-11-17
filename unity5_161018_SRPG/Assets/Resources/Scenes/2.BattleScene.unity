@@ -631,7 +631,6 @@ GameObject:
   - 114: {fileID: 1148025865}
   - 20: {fileID: 1148025867}
   - 114: {fileID: 1148025869}
-  - 95: {fileID: 1148025868}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -700,23 +699,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!95 &1148025868
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1148025864}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1148025869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +786,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1152177951}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -7.97, y: 0, z: 1}
+  m_LocalPosition: {x: -7.4, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 15.912495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1171,7 +1153,6 @@ GameObject:
   - 4: {fileID: 1572202842}
   - 114: {fileID: 1572202841}
   - 114: {fileID: 1572202840}
-  - 114: {fileID: 1572202839}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1179,18 +1160,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1572202839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1572202838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
 --- !u!114 &1572202840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,7 +1414,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1731562583}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.82, y: 0, z: 1}
+  m_LocalPosition: {x: 7.3, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 15.912495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []

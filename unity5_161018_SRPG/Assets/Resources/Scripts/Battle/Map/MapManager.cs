@@ -99,11 +99,11 @@ public class MapManager
         MapInfo info = FileManager.GetInst().LoadMap();
         if(info == null)
         {
-            Debug.Log("info null");
+            Debug.Log("Unity info null");
         }
         if(info.HexInfos == null)
         {
-            Debug.Log("info.HexInfos null");
+            Debug.Log("Unity .HexInfos null");
         }
         CreateMap(info);
     }
@@ -120,7 +120,7 @@ public class MapManager
         MapSizeY = info.MapSizeY;
         MapSizeZ = info.MapSizeZ;
 
-        GameObject map = new GameObject("맵");
+        GameObject map = new GameObject("MAP");
         // Hex맵 그리는 부분
         Map = new HexGrid[info.MapSizeX * 2 + 1][][];
         for(int x = -MapSizeX; x <= MapSizeX; x++)
@@ -167,7 +167,7 @@ public class MapManager
         // 1-02
         Map = new HexGrid[MapSizeX * 2 + 1][][];
         // 2-08:12분 코드 수정(Hierarchy에서 지저분한것들 하나로 묶기위한 오브젝트)
-        GameObject map = new GameObject("맵"); // "맵"=hierarchy에 보여질 이름
+        GameObject map = new GameObject("MAP"); // "맵"=hierarchy에 보여질 이름
         for (int x = -MapSizeX; x <= MapSizeX; x++)
         {
             Map[x + MapSizeX] = new HexGrid[MapSizeY * 2 + 1][];

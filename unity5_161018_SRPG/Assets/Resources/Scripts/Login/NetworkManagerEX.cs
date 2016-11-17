@@ -80,18 +80,18 @@ public class NetworkManagerEX : MonoBehaviour
                     int errorcode = (int)receivePacket["result"];
                     switch(errorcode)
                     {
-                        case 1000: DialogOpen("패스워드가 올바르지 않습니다."); break;
-                        case 1001: DialogOpen("이미 존재하는 닉네임 입니다."); break;
-                        case 1002: DialogOpen("이미 등록된 ID로 계정 생성에 실패 했습니다."); break;
-                        case 1003: DialogOpen("게임 정보를 저장할 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1004: DialogOpen("등록된 계정이 아닙니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1005: DialogOpen("캐릭터 생성에 실패했습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1006: DialogOpen("존재하지 않는 캐릭터 입니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1007: DialogOpen("인벤토리 정보를 찾을 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1008: DialogOpen("아이템 정보를 찾을 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1009: DialogOpen("골드가 부족합니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1010: DialogOpen("인벤토리에 빈 슬롯이 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
-                        case 1011: DialogOpen("아이디 생성에 실패했습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1000: Debug.Log("패스워드가 올바르지 않습니다."); break;
+                        case 1001: Debug.Log("이미 존재하는 닉네임 입니다."); break;
+                        case 1002: Debug.Log("이미 등록된 ID로 계정 생성에 실패 했습니다."); break;
+                        case 1003: Debug.Log("게임 정보를 저장할 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1004: Debug.Log("등록된 계정이 아닙니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1005: Debug.Log("캐릭터 생성에 실패했습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1006: Debug.Log("존재하지 않는 캐릭터 입니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1007: Debug.Log("인벤토리 정보를 찾을 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1008: Debug.Log("아이템 정보를 찾을 수 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1009: Debug.Log("골드가 부족합니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1010: Debug.Log("인벤토리에 빈 슬롯이 없습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
+                        case 1011: Debug.Log("아이디 생성에 실패했습니다. \n확인하고 다시 시도하시기 바랍니다."); break;
                     }
                 }
                 // 실제 처리 결과물
@@ -110,15 +110,15 @@ public class NetworkManagerEX : MonoBehaviour
     }
 
     // Message Box 띄우기
-    public void DialogOpen(string message)
-    {
-        if (UnityEditor.EditorUtility.DisplayDialog(" Message Box", message, "OK", "Cancel"))
-        {
-            Debug.Log("ok");
-        }
-        else
-        {
-            Debug.Log("cancel");
-        }
-    }
+    //public void DialogOpen(string message)
+    //{
+    //    if (UnityEditor.EditorUtility.DisplayDialog(" Message Box", message, "OK", "Cancel"))
+    //    {
+    //        Debug.Log("ok");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("cancel");
+    //    }
+    //}
 }

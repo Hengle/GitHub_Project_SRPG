@@ -50,18 +50,23 @@ public class GameManager : MonoBehaviour
 
 	void Start ()
     {
+        Debug.Log("Unity 1");
         // 맵 생성 -> 3-05:19분 맵정보 xml file을 불러와서 적용할꺼라 주석처리
         //mm.CreateMap();
         mm.CreateTestMap();
+        Debug.Log("Unity 2");
         // 플레이어 생성
         pm.GenPlayerTest();
+        Debug.Log("Unity 3");
         // 배경음악 시작
         sm.PlayMusic(transform.position);
+        Debug.Log("Unity 4");
         // 전투시작,게임오버,클리어 결과 + DamageText를 그려낼 Canvas찾음
         canvas = GameObject.Find("Result");
+        Debug.Log("Unity 5");
     }
-	
-	void Update ()
+
+    void Update ()
     {
         // 게임이 종료됐다면 return
         if(em.GameEnd == true)

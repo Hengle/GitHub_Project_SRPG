@@ -15,13 +15,17 @@ public class FileManager
         return inst;
     }
 
+    private string m_sXmlValue = "";
+
 	public MapInfo LoadMap()
     {
         Debug.Log("LoadMap start");
         MapInfo mapInfo = new MapInfo();
 
         XmlDocument xmlFile = new XmlDocument();
-        xmlFile.Load("test.xml");
+        m_sXmlValue = Application.dataPath + "/Resources" + "/" + "test.xml";
+        xmlFile.Load(m_sXmlValue);
+
         XmlNode mapSize = xmlFile.SelectSingleNode("MapInfo/MapSize");
         string mapSizeString = mapSize.InnerText;
         string[] sizes = mapSizeString.Split(' ');
