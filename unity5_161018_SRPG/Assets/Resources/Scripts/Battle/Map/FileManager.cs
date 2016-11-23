@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Xml;
 
 // 3-05:20분 맵 불러오기
@@ -15,7 +14,10 @@ public class FileManager
         return inst;
     }
 
-    private string m_sXmlValue = "";
+    // 디바이스 체크
+    private string m_sCheckDevice = "";
+    // 디바이스가 안드로이드일 경우에 이걸로 로드한다
+    private TextAsset m_textAsset = null;
 
 	public MapInfo LoadMap()
     {
@@ -23,9 +25,11 @@ public class FileManager
         MapInfo mapInfo = new MapInfo();
 
         XmlDocument xmlFile = new XmlDocument();
-        m_sXmlValue = Application.dataPath + "/Resources" + "/" + "test.xml";
-        xmlFile.Load(m_sXmlValue);
 
+        m_sCheckDevice = "Android";
+        m_textAsset = (TextAsset)Resources.Load("test", typeof(TextAsset));
+        xmlFile.LoadXml(m_textAsset.text);
+        
         XmlNode mapSize = xmlFile.SelectSingleNode("MapInfo/MapSize");
         string mapSizeString = mapSize.InnerText;
         string[] sizes = mapSizeString.Split(' ');
