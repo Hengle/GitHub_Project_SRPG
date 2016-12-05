@@ -50,7 +50,8 @@ public class GUIManager
     // 2-07:15분 UserPlayer에서 복사해옴 / 43분10초부터 GUILayout적용
     public void DrawStatus(PlayerBase pb) // TODO : 이부분을 호출하는 부분 필요함(2-08:18분10초)
     {
-        GUILayout.BeginArea(new Rect(0, Screen.height / 2 + 127f, 150f, Screen.height / 4), "Player Info", GUI.skin.window);
+        // Screen.width(넓이) : 741, Screen.height(높이) : 463
+        GUILayout.BeginArea(new Rect(0, Screen.height - 130f, 150f, 130f), "Player Info", GUI.skin.window);
         GUILayout.Label("Name: Samurai");
         GUILayout.Label("HP: " + pb.status.CurHP);
         GUILayout.Label("MoveRange: " + pb.status.MoveRange);
@@ -61,8 +62,8 @@ public class GUIManager
     // 기본 동작 커맨드창
     public void DrawCommand(PlayerBase pb)
     {
-        GUILayout.BeginArea(new Rect(Screen.width - 150f, Screen.height / 2 + 127f, 150f, Screen.height / 4), "Command", GUI.skin.window);
-
+        // Rect(화면 넓이 - 커맨드 가로폭 = x위치, 화면 높이 - 커맨드 세로폭 = y위치, 커맨드 가로폭 설정, 커맨드 세로폭 설정)
+        GUILayout.BeginArea(new Rect(Screen.width - 150f, Screen.height - 130f, 150f, 130f), "Command", GUI.skin.window);
         if (GUILayout.Button("Move"))
         {
             if (MapManager.GetInst().HighlightMoveRange(pb.CurHex, pb.status.MoveRange) == true)
@@ -87,7 +88,6 @@ public class GUIManager
         {
             PlayerManager.GetInst().NextTurn();
         }
-
         GUILayout.EndArea();
     }
 

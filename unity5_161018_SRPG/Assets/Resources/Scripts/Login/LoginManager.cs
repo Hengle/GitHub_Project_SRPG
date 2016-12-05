@@ -11,9 +11,13 @@ public class LoginManager : MonoBehaviour
     public InputField uid;
     public InputField upw;
 
+    public MessageBox messagebox;
+
     void Start()
     {
         ItemData.Instance.LoadTable();
+
+        //NetworkManager.Instance.messagebox = messagebox;
     }
 
     // UI 구성 전, Test용 Update()
@@ -21,9 +25,9 @@ public class LoginManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            GameData.Instance.charInfo.char_id = 4;
+            GameData.Instance.charInfo.char_id = 2;
             RequestGetCharacterInfo();
-            RequestGetInventoryInfo();
+            //RequestGetInventoryInfo();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -61,7 +65,7 @@ public class LoginManager : MonoBehaviour
         sendData.Add("id", uid.text);
         sendData.Add("pw", upw.text);
 
-        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyJoin));
+        StartCoroutine(NetworkManager.Instance.ProcessNetwork(sendData, ReplyJoin));
     }
 
     private class RecvJoinData
@@ -99,7 +103,7 @@ public class LoginManager : MonoBehaviour
         sendData.Add("id", uid.text);
         sendData.Add("pw", upw.text);
 
-        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyLogin));
+        StartCoroutine(NetworkManager.Instance.ProcessNetwork(sendData, ReplyLogin));
     }
 
     private class RecvLoginData
@@ -128,7 +132,7 @@ public class LoginManager : MonoBehaviour
         sendData.Add("contents", "get_character_info"); // contents : 디렉토리명, get_character_info : php 파일명
         sendData.Add("char_id", GameData.Instance.charInfo.char_id);
 
-        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyGetCharacterInfo));
+        StartCoroutine(NetworkManager.Instance.ProcessNetwork(sendData, ReplyGetCharacterInfo));
     }
 
     private class RecvGetCharInfoData
@@ -175,7 +179,7 @@ public class LoginManager : MonoBehaviour
         sendData.Add("contents", "get_inventory_info");
         sendData.Add("char_id", GameData.Instance.charInfo.char_id);
 
-        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyGetInventoryInfo));
+        StartCoroutine(NetworkManager.Instance.ProcessNetwork(sendData, ReplyGetInventoryInfo));
     }
 
     private class RecvGetInvenInfoData
@@ -203,7 +207,7 @@ public class LoginManager : MonoBehaviour
         sendData.Add("contents", "get_item_info");
         sendData.Add("item_id", item_id);
 
-        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplyGetItemInfo));
+        StartCoroutine(NetworkManager.Instance.ProcessNetwork(sendData, ReplyGetItemInfo));
     }
 
     private class RecvGetItemInfoData
@@ -235,7 +239,7 @@ public class LoginManager : MonoBehaviour
         sendData.Add("char_id", GameData.Instance.charInfo.char_id);
         sendData.Add("item_id", item_id);
 
-        StartCoroutine(NetworkManagerEX.Instance.ProcessNetwork(sendData, ReplySetBuyItem));
+        StartCoroutine(NetworkManager.Instance.ProcessNetwork(sendData, ReplySetBuyItem));
     }
 
     private class RecvSetBuyItemData

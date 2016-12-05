@@ -26,6 +26,8 @@ public class FileManager
 
         XmlDocument xmlFile = new XmlDocument();
 
+        // 빌드해서 테스트바람
+
         m_sCheckDevice = "Android";
         m_textAsset = (TextAsset)Resources.Load("test", typeof(TextAsset));
         xmlFile.LoadXml(m_textAsset.text);

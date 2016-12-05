@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections; // IEnumerator 사용(코루틴)
 // TODO : 유니티 UI타입을 쓰려면 선언해야함(DamageText 표시해줄라고)
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
