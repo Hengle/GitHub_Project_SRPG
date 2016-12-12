@@ -178,7 +178,6 @@ public class PlayerManager
         {
             GameManager.GetInst().ShowGameOver();
             EventManager.GetInst().GameEnd = true;
-            MobRespawn.mobCount = 1;
         }
     }
     

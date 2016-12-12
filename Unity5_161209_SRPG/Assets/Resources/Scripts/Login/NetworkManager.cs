@@ -87,7 +87,7 @@ public class NetworkManager : MonoBehaviour
                             break;
                         case 1001:
                             Debug.Log("등록된 계정이 아닙니다. \n확인하고 다시 시도하시기 바랍니다.");
-                            messagebox.MessageBoxOpen("Failed Login", "등록된 계정이 아닙니다. 확인하고 재시도 바랍니다.");
+                            messagebox.MessageBoxOpen("Failed Login", "없는 계정입니다. 확인하고 재시도 바랍니다.");
                             break;
                         case 1002:
                             Debug.Log("캐릭터 생성에 실패했습니다.");
@@ -107,7 +107,7 @@ public class NetworkManager : MonoBehaviour
                             break;
                         case 1006:
                             Debug.Log("골드가 부족합니다. \n확인하고 다시 시도하시기 바랍니다.");
-                            messagebox.MessageBoxOpen("Gold is not enough", "보유 골드가 충분치 않습니다.");
+                            messagebox.MessageBoxOpen("Gold is not enough !", "보유 골드가 충분치 않습니다.");
                             break;
                         case 1007:
                             Debug.Log("인벤토리에 빈 슬롯이 없습니다. \n확인하고 다시 시도하시기 바랍니다.");
@@ -115,7 +115,7 @@ public class NetworkManager : MonoBehaviour
                             break;
                         case 1008:
                             Debug.Log("아이디 생성에 실패했습니다. \n확인하고 다시 시도하시기 바랍니다.");
-                            messagebox.MessageBoxOpen("Failed New Join", "아이디 생성에 실패했습니다. 확인하고 다시 시도하시기 바랍니다.");
+                            messagebox.MessageBoxOpen("Failed New Join !", "아이디가 중복됩니다. 확인하고 다시 시도하시기 바랍니다.");
                             break;
                     }
                 }

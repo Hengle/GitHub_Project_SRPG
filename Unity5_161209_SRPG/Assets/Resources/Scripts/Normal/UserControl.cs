@@ -64,7 +64,7 @@ public class UserControl : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.back);
 
         float speed = forwardSpeed * Input.GetAxis("Vertical");
-        playerController.SimpleMove(speed * forward);
+        playerController.SimpleMove(speed * forward * 2.5f);
 
         // 점프
         if (Input.GetKeyDown("space") && playerController.isGrounded)

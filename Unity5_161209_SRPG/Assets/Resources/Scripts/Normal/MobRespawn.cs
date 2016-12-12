@@ -8,11 +8,9 @@ public class MobRespawn : MonoBehaviour
     // 몹 생성 타이머
     private float createTimer = 0f;
     // 현재 몹 수
-    static public int mobCount = 1;
+    public int mobCount = 1;
     // 남은 몹 수
     static public int mobRemain;
-
-    static public bool first = true;
 
     // Use this for initialization
     void Start ()
@@ -32,13 +30,13 @@ public class MobRespawn : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (mobCount <= 3)
+        if (mobCount <= 5)
         {
             createTimer -= Time.deltaTime;
             if (createTimer <= 0f)
             {
                 // 생성 타이머 초기화(10초마다 하나씩 생성)
-                createTimer = 3f;
+                createTimer = 10f;
                 // 몬스터를 생성하고, 
                 GameObject mob = Instantiate(mobPrefab);
                 // 몬스터 수 1증가
@@ -48,8 +46,8 @@ public class MobRespawn : MonoBehaviour
                 if (mob != null)
                 {
                     // 생성 위치 지정
-                    float x = Random.Range(6f, 18f);
-                    float z = Random.Range(4f, 18f);
+                    float x = Random.Range(5f, 23f);
+                    float z = Random.Range(5f, 23f);
                     mob.transform.position = new Vector3(x, 1f, z);
                 }
                 else

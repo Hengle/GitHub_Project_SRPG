@@ -68,11 +68,6 @@ public class MobControl : MonoBehaviour
         }
     }
 
-    public void resetPos(Transform pos)
-    {
-
-    }
-    
     public void MobStateIdle()
     {
         moveTimer -= Time.deltaTime;
@@ -123,7 +118,7 @@ public class MobControl : MonoBehaviour
 
     public void MobStateTrace()
     {
-        float speed = 2f;
+        float speed = 0.7f;
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
 
         Vector3 v = playerTrans.position - transform.position;
@@ -186,6 +181,7 @@ public class MobControl : MonoBehaviour
         return false;
     }
 
+    // 몬스터 행동 범위 gizmo 그리기(게임씬에선 안보임)
     void OnDrawGizmos()
     {
         if (this == null || playerTrans == null)
