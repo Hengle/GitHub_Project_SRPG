@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections; // IEnumerator 사용(코루틴)
 
 public class MobRespawn : MonoBehaviour
 {
@@ -8,9 +8,9 @@ public class MobRespawn : MonoBehaviour
     // 몹 생성 타이머
     private float createTimer = 0f;
     // 현재 몹 수
-    public int mobCount = 1;
+    private int mobCount = 1;
     // 남은 몹 수
-    static public int mobRemain;
+    static public int mobRegen = 5;
 
     // Use this for initialization
     void Start ()
@@ -30,7 +30,7 @@ public class MobRespawn : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (mobCount <= 5)
+        if (mobCount <= mobRegen)
         {
             createTimer -= Time.deltaTime;
             if (createTimer <= 0f)
@@ -40,15 +40,15 @@ public class MobRespawn : MonoBehaviour
                 // 몬스터를 생성하고, 
                 GameObject mob = Instantiate(mobPrefab);
                 // 몬스터 수 1증가
-                Debug.Log("현재 몹 수: " + mobCount);
+                Debug.Log("현재 몹 수: " + mobCount + ",\nregen될 총 몹수: " + mobRegen);
                 mobCount++;
-                mobRemain = mobCount;
                 if (mob != null)
                 {
                     // 생성 위치 지정
                     float x = Random.Range(5f, 23f);
                     float z = Random.Range(5f, 23f);
                     mob.transform.position = new Vector3(x, 1f, z);
+                    Debug.Log("x,z = " + x + "," + z);
                 }
                 else
                 {
@@ -56,15 +56,15 @@ public class MobRespawn : MonoBehaviour
                 }
             }
         }
-        else
+        else if(mobRegen == 0)// mobCount가 mobRegen보다 작으면, 모든 몹을 잡았다는 것임으로
         {
+            Debug.Log("현재 몹 수: " + mobRegen);
+            Debug.Log("Game Clear !!");
+            Time.timeScale = 0;
             return;
         }
-
-        if(mobRemain == 0)
-        {
-            Debug.Log("현재 몹 수: " + mobCount);
-            Debug.Log("Game Clear !!");
+        else
+        { 
             return;
         }
     }

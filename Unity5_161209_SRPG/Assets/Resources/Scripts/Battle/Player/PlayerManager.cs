@@ -172,12 +172,13 @@ public class PlayerManager
         {
             GameManager.GetInst().ShowStageClear();
             EventManager.GetInst().GameEnd = true;
-            MobRespawn.mobRemain--;
+            MobRespawn.mobRegen--;
         }
         else if(userCnt == 0)
         {
             GameManager.GetInst().ShowGameOver();
             EventManager.GetInst().GameEnd = true;
+            MobRespawn.mobRegen = 5;
         }
     }
     

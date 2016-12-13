@@ -12,9 +12,7 @@ public class UserControl : MonoBehaviour
     private float time = 0f;
     // 페이드 on/off
     private bool fadeSet = true;
-    // 씬전환시 몹 행동 멈춤 flag
-    static public bool mobFlag = true;
-
+    
     // move ver.1
     // 애니메이터 변수 선언
     private Animator animator;
@@ -65,12 +63,12 @@ public class UserControl : MonoBehaviour
 
         float speed = forwardSpeed * Input.GetAxis("Vertical");
         playerController.SimpleMove(speed * forward * 2.5f);
-
-        // 점프
-        if (Input.GetKeyDown("space") && playerController.isGrounded)
-        {
-            playerController.Move(Vector3.up);
-        }
+        
+        //// 점프
+        //if (Input.GetKeyDown("space") && playerController.isGrounded)
+        //{
+        //    playerController.Move(Vector3.up);
+        //}
 
         // 걷는 애니메이션
         if (speed != 0)
@@ -101,7 +99,6 @@ public class UserControl : MonoBehaviour
             {
                 fadeSet = true;
                 time = 0f;
-                mobFlag = false;
                 SceneManager.LoadScene(2);
             }
         }
